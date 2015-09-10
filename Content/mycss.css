@@ -1,0 +1,162 @@
+﻿
+body {
+    margin-top:40px;
+}
+.stepwizard-step p {
+    margin-top: 10px;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 50%;
+    position: relative;
+}
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-order: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+
+.wrapper {
+    float: left;
+    position:relative;
+    width: 100px;
+    height: 100px;
+
+        margin-left:5px; 
+    margin-right:5px;
+    margin-bottom:5px;
+}
+
+.img {
+    position: relative;
+    top: 0px;
+    left: 0px;
+
+    width: 100%;
+    height: 100%;
+}
+
+.replace {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    
+    width: 10%;
+    height: 10%;
+    opacity: 0.5;
+}
+.cross-img {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    
+    width: 10%;
+    height: 10%;
+    
+}
+
+.cross-img1 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    
+    width: 1.5%;
+    height: 1.5%;
+    
+}
+
+div.container { 
+    position:relative;
+    
+}
+
+#painel {
+    float: left;
+    display: inline-block;
+}
+
+.right-div {
+    border: 5px solid;
+     width: 45%; 
+     float: right; 
+     height: 320px;
+}
+.left-div {
+    border: 5px solid;
+     width: 45%; 
+     float: left; 
+     height: 320px;
+}
+
+
+img.img-rounded {
+    margin-left:5px; 
+    margin-right:5px;
+    margin-bottom:5px;
+}
+#links {
+    float: right;
+    display: inline-block;
+}
+
+    #links > a {
+        position: relative;
+        display:list-item;
+    }
+
+img.borderline {
+    border: 1px solid green;
+}
+
+input[name="datepicker"] {
+    float: left
+}
+
+.uploadButton input[type="file"] {
+    cursor:pointer;
+    position:absolute;
+    top:0px;
+    opacity:0;
+}
+
+.uploadButton {
+    position:relative;
+    overflow:hidden;
+    height:128px;
+    cursor:pointer;
+    width:128px;
+    background:url(http://cdn4.iconfinder.com/data/icons/dellios_system_icons/png_128/arrow-up.png);
+    
+    opacity:0.5;
+}
+.uploadButton:hover {
+    opacity:1;   
+}
+
+

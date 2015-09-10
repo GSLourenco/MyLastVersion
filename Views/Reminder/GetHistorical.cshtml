@@ -1,0 +1,73 @@
+﻿@model IEnumerable<MvcApplication2.Models.Reminder>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>Pictogramas WEB - Envio de lembretes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="../../Content/jquery.datetimepicker.css"/ >
+    <link rel="stylesheet" href="/Content/mycss.css">
+
+    <script>"https://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.js"</script>
+    <script>"https://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.min.js"</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="../../Content/jquery.datetimepicker.js"></script>
+    <script src="../../Content/myjavascript.js"></script>
+    <link rel="stylesheet" href="../../Content/jquery-ui.min.css">
+    <script src="../../Content/jquery-ui.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style type="text/css"></style>
+</head>
+<body>
+    <div id ="links" class="col-md-2">
+        @foreach (var reminder in Model)
+        {
+            <a  onClick="DetailHistoricalReminder(@reminder.id)">Lembrete : @reminder.title</a>
+        }
+    </div>
+    <div id="editdiv" class="col-md-10"></div>
+</body>
+</html>
+
+<script>
+    function DetailHistoricalReminder(id, contact) {
+        $.ajax({
+            type: 'GET',
+            url: '/Reminder/GetHistoricalDetailedReminder',
+            data: {
+                'idx': id,
+            },
+            success: function (data) {
+                $('#editdiv').html(data);
+            },
+            statusCode: {
+                404: function () {
+                    $(this).remove();
+                }
+            }
+        })
+        ;
+    }
+</script>

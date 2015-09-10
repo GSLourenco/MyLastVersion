@@ -1,0 +1,716 @@
+﻿@model List<String>
+
+@{
+    ViewBag.Title = "SelectContact";
+}
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>Pictogramas WEB - Envio de lembretes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="../../Content/jquery.datetimepicker.css"/ >
+    <link rel="stylesheet" href="/Content/mycss.css">
+
+    <script>"https://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.js"</script>
+    <script>"https://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.min.js"</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="../../Content/jquery.datetimepicker.js"></script>
+    <script src="../../Content/myjavascript.js"></script>
+    <link rel="stylesheet" href="../../Content/jquery-ui.min.css">
+    <script src="../../Content/jquery-ui.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style type="text/css"></style>
+</head>
+
+<html>
+<body style="background: LightGray">
+
+     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header" >
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Home/LogOut">LogOut</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Contactos<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/Contacts/GenerateCode">Adicionar Contacto</a></li>
+                    <li><a href="/Contacts/ManageContacts">Lista de Contactos</a></li>
+                    <li><a href="#">Histórico</a></li>
+                </ul>
+            </li>
+                   
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Lembretes<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/Reminder/SelectContact">Adicionar Lembretes</a></li>
+                    <li><a href="#">Editar ou eliminar lembretes</a></li>
+                </ul>
+            </li>
+                   
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- Inicio container-->
+    <div class="container" style="margin-top: 60px;">
+
+        <div class="stepwizard col-md-offset-3">
+            <div class="stepwizard-row setup-panel">
+                <div class="stepwizard-step">
+                    <a id="noPrevious" href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                    <p>Step 1</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                    <p>Step 4</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                    <p>Step 2</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a id ="stepwizard3" href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                    <p>Step 3</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 setup-content" style="background: rgba(245, 239, 239, 1)" id="step-1">
+            <div class="col-md-6">
+                
+                <h4>Step 1- Escolha o contacto para quem quer enviar lembretes</h4>
+                <h4>Lista de contactos</h4>
+                <div class="table-responsive">
+
+
+                    <table id="mytable" data-toggle="table" data-height="500" class="table table-bordred table-striped">
+
+                        <thead>
+
+                            <tr>
+                                <th></th>
+                                <th>Contacto</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var c in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="radio" name="contact" value="@c" class="checkthis form-group"></td>
+                                    <td>
+                                        
+                                            <div style="height: 100%; width: 100%">
+                                                @c
+                                            </div>
+                                        
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                    <label id="errorNoContacts">
+                        @if (ViewBag.Message != null)
+                        {
+                            @ViewBag.Message;
+                        }
+                    </label>
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="https://s3.eu-central-1.amazonaws.com/pictograms/telefone.png" />
+            </div>
+
+        </div>
+         <div class="row setup-content" id="step-4">
+                <div class="row">
+                    <input type ="radio" name="reminder" value="1" checked="checked" class="checkthis form-group"> Lembrete com Pictogramas<br>
+                    <input type ="radio" name="reminder" value="2" class="checkthis form-group"> Lembrete sem Pictogramas<br>
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+                </div>
+        </div>
+        <div class="row setup-content"  id="step-2">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <h3>Step 2</h3>
+                    
+                    <div id="dialog-confirm"></div>
+                    <form role="form" action="/Reminder/addReminder" method="post" onsubmit="addReminder();return false;">
+                    <input id="title" maxlength="50" type="text" required="required" class="form-control" placeholder="Inserir título do lembrete" />
+                    <p></p>
+                    <input id="description" maxlength="150" type="text" required="required" class="form-control" placeholder="Inserir descrição do lembrete" />
+                    <p></p>
+ 
+                    <div id="container" class="container col-md-12" >
+                    <div class="col-md-12" id="pictogramMode">
+                        <input type="radio" name="mode" value="pict" checked="checked" class="checkthis form-group">Pesquisa de pictogramas<br>
+                        <input type="radio" name="mode" class="checkthis form-group">Upload de Imagem<br>
+                    </div>
+                     <div class="col-md-12" id="searchbox">
+                         @Html.TextBox("name", "", new { @class = "form-control", placeholder = "Inserir palavra ou expressão" })
+                         <button type="button" class="btn btn-success">Pesquisar pictograma</button>
+                    </div>
+                    <div class="">
+                        <div id="FileUpload" class="col-md-6 left-div" style="display: none;">
+                            <div class="uploadButton">
+                                <input id="file" type="file" name="file"/>
+                            </div>
+                            <label id="FileError"></label>
+                             <button type="button" class="btn btn-success" value="Fazer upload da imagem" >Fazer upload da imagem</button>
+                        </div> 
+                     <div id="painel" class="col-md-6 left-div" ></div>
+                     <div id="selectedPainel" class="col-md-6 right-div"></div>
+                    </div>
+                        </div>
+                    <label id ="NoPictogramsError"></label>
+                    <div style="clear: both"></div>
+                    <p></p>
+                    <div style="clear: both"></div>
+                     <div class="container col-md-12" >
+                         <div class="col-md-4">
+                        <input id="datetimepicker3" name="datepicker" type="text" style="display: none;">
+                          </div>
+                         <div id="weekrepeat container" class="col-md-3">
+                        <input type="checkbox" name="week repeat" value="enable week repeat"> Repetir semanalmente<br>
+                        <div id ="days-of-week">
+                        <input type ="radio" value="7" class="checkthis form-group"> Domingo<br>
+                        <input type ="radio" value="1" class="checkthis form-group"> Segunda-Feira<br>
+                        <input type ="radio" value="2" class="checkthis form-group"> Terça-Feira<br>
+                        <input type ="radio" value="3" class="checkthis form-group"> Quarta-Feira<br>
+                        <input type ="radio" value="4" class="checkthis form-group"> Quinta-Feira<br>
+                        <input type ="radio" value="5" class="checkthis form-group"> Sexta-Feira<br>
+                        <input type ="radio" value="6" class="checkthis form-group"> Sábado<br>
+                        </div>
+                        </div>
+                     </div>
+                    <div class="container col-md-12">
+                        <button id="button2" type="submit" class="btn btn-success" value="Submit">Adicionar Lembrete</button>
+                    </div>
+                    
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+                    </form>
+                    <label id="ReminderError"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row setup-content" id="step-3">
+                <div class="row">
+                    <h3>Step 3</h3>
+                    <div id ="links" class="col-md-2"></div>
+                    <div id="editdiv" class="col-md-10">
+                    </div>
+                    <a id="sendReminder" href="#">Enviar lembretes</a>
+                    
+                </div>
+        </div>
+        <!-- Fim container-->
+    </div>
+</body>
+
+</html>
+<script type="text/javascript">
+    var addRemindersCounted = 0;
+
+
+    $('#datetimepicker3').datetimepicker({
+        format: 'd.m.Y H:i',
+        inline: true,
+        lang: 'pt',
+        theme: 'dark',
+        minDate: '-1970/01/01'
+
+    });
+    var weeks = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"];
+
+    $(document).ready(function () {
+        var navListItems = $('div.setup-panel div a'),
+                allWells = $('.setup-content'),
+                allNextBtn = $('.nextBtn'),
+                checkbox = $("input[name='week repeat']"),
+                radioMode = $("input[name='mode']");
+        var weekrepeat = document.getElementById("days-of-week");
+        var inputsWeek = $("#days-of-week > :input");
+
+        $(radioMode).each(function () {
+            $(this).on("click", function () {
+                var val = this.value;
+                if (val=="pict") {
+                    $("#FileUpload").hide();
+                    $("#painel").show();
+                    $("#searchbox").show();
+                }
+                else {
+                    $("#FileUpload").show();
+                    $("#painel").hide();
+                    $("#searchbox").hide();
+                }
+            });
+        });
+
+        $($("#searchbox :button")[0]).on("click", function () {
+            loadPictogram($('#name'), $('#painel')[0], $('#selectedPainel')[0]);
+        });
+
+        $($("#FileUpload :button")[0]).on("click", function () {
+            UploadFile($('#file')[0], $('#selectedPainel'),$('#dialog-confirm'));
+        });
+
+
+
+        $(inputsWeek).each(function () {
+            $(this).on("click", function () {
+                if ($(this).hasClass("previousChecked")) {
+                    this.checked = false;
+                    this.className = "";
+                }
+                else {
+                    this.checked = true;
+                    this.className = "previousChecked";
+                }
+            });
+        });
+
+        $(weekrepeat).hide();
+
+        checkbox.click(function () {
+            if ($(this).is(':checked')) {
+                $(weekrepeat).show();
+            }
+            else {
+                $(weekrepeat).hide();
+            }
+        });
+
+        $(".uploadButton").mousemove(function (e) {
+            var offL, offR, inpStart
+            offL = $(this).offset().left;
+            offT = $(this).offset().top;
+            aaa = $(this).find("input").width();
+            $(this).find("input").css({
+                left: e.pageX - aaa - 30,
+                top: e.pageY - offT - 10
+            })
+        });
+
+        allWells.hide();
+
+        navListItems.click(function (e) {
+            e.preventDefault();
+            var $target = $($(this).attr('href')),
+                    $item = $(this);
+
+            if (!$item.hasClass('disabled')) {
+                navListItems.removeClass('btn-primary').addClass('btn-default');
+                $item.addClass('btn-primary');
+                allWells.hide();
+                $target.show();
+                $target.find('input:eq(0)').focus();
+            }
+        });
+
+        allNextBtn.click(function () {
+            var curStep = $(this).closest(".setup-content"),
+                curStepBtn = curStep.attr("id"),
+                nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+                curInputs = curStep.find("input[type='text'],input[type='url'],input[type='radio']"),
+                isValid = true;
+
+            $(".form-group").removeClass("has-error");
+            if (curStepBtn == 'step-1') {
+                var curInputs = curStep.find("input[type='radio']:checked");
+                if (curInputs.length > 0) {
+                    var name = (curInputs[0]).value;
+                    getRemindersFromUser(name);
+                    nextStepWizard.removeAttr('disabled').trigger('click');
+                    $("#noPrevious").attr("disabled", "disabled");
+                    $("#sendReminder").attr("href", "/Reminder/SendReminders?User=" + curInputs[0].value);
+                    return;
+                }
+
+
+                isValid = false;
+                $('#errorNoContacts').html("Não existe nenhum contacto selecionado");
+            }
+            else if (curStepBtn == "step-4") {
+                radioMode = $("input[name='reminder']:checked");
+                if (radioMode[0].value == 2) {
+                    $("#container").remove();
+                }
+                isValid = true;
+            }
+            else if (curStepBtn == "step-2") {
+                if (addRemindersCounted == 0) {
+                    isValid = false;
+                    alert("Ainda não adicionou um lembrete");
+                }
+                else isValid = true;
+            }
+
+
+            if (isValid)
+                nextStepWizard.removeAttr('disabled').trigger('click');
+        });
+
+        $('div.setup-panel div a.btn-primary').trigger('click');
+    });
+
+    function ExecuteWhenPartialViewIsOn() {
+       
+            var radioMode = $("input[name='mode1']");
+            $(radioMode).each(function () {
+                $(this).on("click", function () {
+                    var val = this.value;
+                    if (val == "pict") {
+                        $("#FileUpload1").hide();
+                        $("#painel1").show();
+                        $("#searchbox1").show();
+                    }
+                    else {
+                        $("#FileUpload1").show();
+                        $("#painel1").hide();
+                        $("#searchbox1").hide();
+                    }
+                });
+            });
+
+            
+            $($("#searchbox1 :button")[0]).on("click", function () {
+                loadPictogram($('#name1'), $('#painel1')[0], $('#selectedPainel1')[0]);
+            });
+
+            $($("#FileUpload1 :button")[0]).on("click", function () {
+                UploadFile($('#file1')[0], $('#selectedPainel1'), $('#dialog-confirm1'));
+            });
+
+
+            $('#selectedPainel1 > .wrapper').each(function () {
+                var div = this;
+                addCrossAndReplace(div)
+            });
+
+            $(".uploadButton").mousemove(function (e) {
+                var offL, offR, inpStart
+                offL = $(this).offset().left;
+                offT = $(this).offset().top;
+                aaa = $(this).find("input").width();
+                $(this).find("input").css({
+                    left: e.pageX - aaa - 30,
+                    top: e.pageY - offT - 10
+                })
+            });
+        
+    }
+
+    function getRemindersFromUser(user) {
+        $.ajax({
+            type: 'GET',
+            url: '/Reminder/getAllReminders',
+            contentType: "application/json; charset=utf-8",
+            data: { 'user': user },
+            traditionel: true,
+            success: function (data, textStatus, xhr) {
+                if (data.redirectUrl != null) {
+                    window.location = data.redirectUrl;
+                    return;
+                }
+
+                if (data.length > 0) var step = $("#stepwizard3").removeAttr("disabled");
+
+                for (var i = 0; i < data.length; i++) {
+                    var link = document.createElement("a");
+                    var idx = encodeURIComponent(data[i].id);
+                    var username = encodeURIComponent(data[i].contact);
+                    link.textContent = "Lembrete: " + data[i].title;
+                    link.setAttribute("ReminderId", idx);
+                    $('#links').append(link);
+                    addRemindersCounted++;
+
+                    $(link).on("click", {
+                        id: idx, usernam: username, lnk:link
+                    }, function (event) {
+                       
+                        $.ajax({
+                            type: 'GET',
+                            url: '/Reminder/EditReminder',
+                            data: {
+                                'idx': event.data.id,
+                                'username': event.data.usernam
+                            },
+                            success: function (data) {
+                                $('#editdiv').html(data);
+                                ExecuteWhenPartialViewIsOn();
+                            },
+                            statusCode: {
+                            404: function() {
+                                $(event.data.lnk).remove();
+                            }
+                            },
+                            statusCode: {
+                                500: function (data) {
+                                    var newDoc = document.open("text/html", "replace");
+                                    newDoc.write(data.responseText);
+                                    newDoc.close();
+                                }
+                            }
+                        })
+                        ;
+                    });
+                }
+            },
+                statusCode: {
+                    500: function (data) {
+                        var newDoc = document.open("text/html", "replace");
+                        newDoc.write(data.responseText);
+                        newDoc.close();
+                    }
+                }
+        });
+    }
+
+    function addReminder() {
+
+        var radioMode = $("input[name='reminder']");
+        var datetimer = $('#datetimepicker3')[0];
+        var test = $(datetimer).siblings("[class=xdsoft_datetimepicker xdsoft_dark xdsoft_noselect  xdsoft_inline]")[0];
+        var calendar = $(test).find("[class*=xdsoft_current]");
+        var dateCurrent = calendar[2];
+        var timeCurrent = calendar[3];
+
+        var date = dateCurrent.getAttribute("data-year") + "-" + (parseInt(dateCurrent.getAttribute("data-month")) + 1) + "-" + dateCurrent.getAttribute("data-date");
+        var timer = timeCurrent.getAttribute("data-hour") + ":" + timeCurrent.getAttribute("data-minute");
+
+
+        var imgs = $("#selectedPainel").find('img.img');
+        if (radioMode[0].value == 1) {
+            if (imgs.length == 0) { $('#NoPictogramsError').html("Não tem pictogramas selecionados"); return; }
+        }
+        var urls = new Array();
+        for (var i = 0; i < imgs.length; i++) {
+            urls[i] = imgs[i].getAttribute("src");
+        }
+
+        var radio = $("input[type=radio]:checked");
+        var model = radio[0].value;
+        var title = $("#title").val();
+        var description = $("#description").val();
+
+        var inputsWeek = $("#days-of-week > :input");
+        var anyBoxesChecked = [];
+
+      
+        for (var i = 0; i < inputsWeek.length; i++) {
+            var check = $(inputsWeek[i]).is(':checked');
+            anyBoxesChecked.push(check);
+        }
+
+
+        $.ajax({
+            type: 'POST',
+            url: '/Reminder/addReminder',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                title: title,
+                description: description,
+                date: date,
+                time: timer,
+                urls: JSON.stringify(urls),
+                contact: model,
+                repeatingDays: anyBoxesChecked
+            }),
+            traditionel: true,
+            success: function (data, textStatus, xhr) {
+                if (data.redirectUrl != null) {
+                    window.location = data.redirectUrl;
+                    return;
+                }
+
+                var rsp = xhr.responseText;
+                rsp = rsp.split(" ");
+                var idx = encodeURIComponent(rsp[0]);
+                var link = document.createElement("a");
+                link.setAttribute("ReminderId", idx);
+                link.textContent = "Lembrete: " + rsp[1];
+                $('#links').append(link);
+                $('#painel').empty();
+                $('#selectedPainel').empty();
+                $("#ReminderError").empty();
+                addRemindersCounted++;
+                
+                $(link).on("click", {
+                    id: idx, usernam: rsp[2]
+                }, function (event) {
+
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Reminder/EditReminder',
+                        data: {
+                            'idx': event.data.id,
+                            'username': event.data.usernam
+                        },
+                        success: function (data) {
+                            $('#editdiv').html(data);
+                            ExecuteWhenPartialViewIsOn();
+                        },
+                        statusCode: {
+                            404: function () {
+                                $(event.data.lnk).remove();
+                            }
+                        },
+                        statusCode: {
+                            500: function (data) {
+                                var newDoc = document.open("text/html", "replace");
+                                newDoc.write(data.responseText);
+                                newDoc.close();
+                            }
+                        }
+                    });
+                });
+            },
+            statusCode: {
+                400: function (data) {
+                    $("#ReminderError").html(data.statusText);
+                }
+            },
+            statusCode: {
+            500: function (data) {
+                var newDoc = document.open("text/html", "replace");
+                newDoc.write(data.responseText);
+                newDoc.close();
+            }
+        }
+        });
+
+
+    }
+
+
+    function UploadFile(fileInput,painel,dialog) {
+        
+        var formdata = new FormData(); //FormData object
+        //Iterating through each files selected in fileInput
+        for (i = 0; i < fileInput.files.length; i++) {
+            //Appending each file to FormData object
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+        }
+        //Creating an XMLHttpRequest and sending
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Reminder/UploadFile');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    var res = JSON.parse(xhr.responseText);
+                    $("#FileError").empty();
+                    addImage(res,painel[0]);
+                }
+                if (xhr.status == 415) {
+                    $("#FileError").html("Formato de ficheiro selecionado é inválido");
+                    
+                }
+
+                if (xhr.status == 403) {
+                    $("#FileError").html("Já ultrapassou o limite de ficheiros para upload");
+
+                }
+                if (xhr.status == 500) {
+                    if (xhr.responseURL != null) {
+                        var newDoc = document.open("text/html", "replace");
+                        newDoc.write(xhr.response);
+                        newDoc.close();
+                    }
+                }
+                if (xhr.status == 409) {
+                    $(dialog[0]).html("Já adicionou recentemente uma imagem com este nome, deseja substituir a imagem?");
+                    $("#FileError").empty();
+                    $($(dialog)[0]).dialog({
+                        modal: true,
+                        title: 'Confirmar',
+                        zIndex: 10000,
+                        autoOpen: true,
+                        height: 250,
+                        width: 400,
+                        resizable: false,
+                        buttons: {
+                        Yes: function () {
+                            var formdata = new FormData(); //FormData object
+                            //Iterating through each files selected in fileInput
+                            for (i = 0; i < fileInput.files.length; i++) {
+                                //Appending each file to FormData object
+                                formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                            }
+                            //Creating an XMLHttpRequest and sending
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('POST', '/Reminder/ReplaceFile');
+                            xhr.send(formdata);
+
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState == 4 ) {
+                                    
+                                    if(xhr.status == 200){
+                                        var res = JSON.parse(xhr.responseText);
+                                        addImage(res,painel[0]);
+                                    }
+
+                                    if (xhr.status == 403) {
+                                        $("#FileError").html("Já ultrapassou o limite de ficheiros para upload");
+
+                                    }
+                                    
+                                    if (xhr.status == 500) {
+                                        if (xhr.responseURL != null) {
+                                            var newDoc = document.open("text/html", "replace");
+                                            newDoc.write(xhr.response);
+                                            newDoc.close();
+                                        }
+                                    }
+                                }
+                            }
+                        $(this).dialog("close");
+                    },
+                    No: function () {
+                    $(this).dialog("close");
+                }
+                },
+                });
+                }
+            }
+        
+        return false;
+    } 
+        
+    }
+</script>

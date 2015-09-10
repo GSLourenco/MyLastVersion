@@ -1,0 +1,157 @@
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\MvcApplication2.dll
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\MvcApplication2.pdb
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\Newtonsoft.Json.dll
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Net.Http.Formatting.dll
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.Helpers.dll
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.Http.dll
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.Http.WebHost.dll
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.Mvc.dll
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.Razor.dll
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Deployment.dll
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.dll
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Razor.dll
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\Newtonsoft.Json.xml
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Net.Http.Formatting.xml
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.Helpers.xml
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.Http.xml
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.Http.WebHost.xml
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.Mvc.xml
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.Razor.xml
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.xml
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Deployment.xml
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Razor.xml
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\obj\Debug\PictogramsWeb.csprojResolveAssemblyReference.cache
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\obj\Debug\MvcApplication2.dll
+C:\Users\pcmultimedia\documents\visual studio 2012\Projects\MvcApplication2\MvcApplication2\obj\Debug\MvcApplication2.pdb
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\MvcApplication2.dll.config
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\MvcApplication2.dll
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\MvcApplication2.pdb
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\Microsoft.Web.Infrastructure.dll
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\Newtonsoft.Json.dll
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.Helpers.dll
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.Mvc.dll
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.Razor.dll
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Deployment.dll
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.dll
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Razor.dll
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\Newtonsoft.Json.xml
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.Helpers.xml
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.Mvc.xml
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.Razor.xml
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.xml
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Deployment.xml
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Razor.xml
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\obj\Debug\PictogramsWeb.csprojResolveAssemblyReference.cache
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\obj\Debug\MvcApplication2.dll
+D:\Dropbox\ISEL\Projeto\Gonçalo\MvcApplication2\MvcApplication2\obj\Debug\MvcApplication2.pdb
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\MvcApplication2.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\MvcApplication2.pdb
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\Newtonsoft.Json.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.Helpers.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.Mvc.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.Razor.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Razor.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\Newtonsoft.Json.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.Helpers.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.Mvc.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.Razor.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Razor.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\obj\Debug\PictogramsWeb.csprojResolveAssemblyReference.cache
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\obj\Debug\MvcApplication2.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\MvcApplication2\MvcApplication2\obj\Debug\MvcApplication2.pdb
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\MvcApplication2.dll
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\MvcApplication2.pdb
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\Newtonsoft.Json.dll
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\System.Web.Helpers.dll
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\System.Web.Mvc.dll
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\System.Web.Razor.dll
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.dll
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Razor.dll
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\Newtonsoft.Json.xml
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\System.Web.Helpers.xml
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\System.Web.Mvc.xml
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\System.Web.Razor.xml
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.xml
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\bin\System.Web.WebPages.Razor.xml
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\obj\Debug\PictogramsWeb.csprojResolveAssemblyReference.cache
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\obj\Debug\MvcApplication2.dll
+C:\Users\Gonçalo Silva\Documents\GitHub\MvcApplication2\MvcApplication2\obj\Debug\MvcApplication2.pdb
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\MvcApplication2.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\MvcApplication2.pdb
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Net.Http.Formatting.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.Helpers.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.Http.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.Http.WebHost.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.Mvc.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.Razor.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.WebPages.Deployment.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.WebPages.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.WebPages.Razor.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\Microsoft.Web.Infrastructure.xml
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Net.Http.Formatting.xml
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.Helpers.xml
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.Http.xml
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.Http.WebHost.xml
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.Mvc.xml
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.Razor.xml
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.WebPages.xml
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.WebPages.Deployment.xml
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\System.Web.WebPages.Razor.xml
+C:\Users\pcmultimedia\Desktop\Mvc Application\obj\Debug\MvcApplication2.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\obj\Debug\MvcApplication2.pdb
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\AWS.SessionProvider.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\AWS.TraceListener.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\AWSSDK.dll
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\AWS.SessionProvider.xml
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\AWS.TraceListener.xml
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\AWSSDK.xml
+C:\Users\pcmultimedia\Desktop\Mvc Application\bin\MvcApplication2.dll.config
+C:\Users\pcmultimedia\Desktop\Mvc Application\obj\Debug\PictogramsWeb.csprojResolveAssemblyReference.cache
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\obj\Debug\PictogramsWeb.csprojResolveAssemblyReference.cache
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\obj\Debug\MvcApplication2.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\MvcApplication2.dll.config
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\MvcApplication2.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\MvcApplication2.pdb
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.Core.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\Quartz.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Net.Http.Formatting.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Helpers.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Http.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Http.WebHost.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Mvc.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Razor.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Deployment.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Razor.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\AWS.SessionProvider.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\AWS.TraceListener.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\AWSSDK.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.pdb
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.Core.pdb
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.Core.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\Quartz.pdb
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\Quartz.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\Microsoft.Web.Infrastructure.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Net.Http.Formatting.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Helpers.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Http.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Http.WebHost.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Mvc.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Razor.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Deployment.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Razor.xml
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\obj\Debug\MvcApplication2.pdb

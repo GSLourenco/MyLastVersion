@@ -1,0 +1,144 @@
+﻿@model MvcApplication2.Models.Reminder
+
+
+<div class="container col-md-10" >
+        <img class="cross-img1" onclick="DeleteReminder(this.parentElement,@Model.id)" src="http://www.clker.com/cliparts/0/7/e/a/12074327311562940906milker_X_icon.svg.med.png" />
+        <p></p>
+        <!-- Features Section -->
+        <div id="dialog-confirm1"></div>
+        <form role="form" action="/Reminder/EditReminder" method="post" onsubmit="editReminder();return false;">
+        <div class="row">
+        <input maxlength="50" id="title1" type="text" required="required" class="form-control" placeholder="Inserir título do lembrete" value="@Model.title" />
+            <p></p>
+            <input maxlength="150" id="description1" type="text" required="required" class="form-control" placeholder="Inserir descrição do lembrete" value="@Model.description" />
+            <p></p>
+            @{System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+            if(js.Deserialize<List<string>>(Model.urls).Count()>0){
+            <div id="container" class="container col-md-12" >
+                    <div class="col-md-12" id="pictogramMode">
+                        <input type="radio" name="mode1" value="pict" checked="checked" class="checkthis form-group">Pesquisa de pictogramas<br>
+                        <input type="radio" name="mode1" class="checkthis form-group">Upload de Imagem<br>
+                    </div>
+                     <div class="col-md-12" id="searchbox1">
+                         @Html.TextBox("name1", "", new { @class = "form-control", placeholder = "Inserir palavra ou expressão" })
+                         <button type="button" class="btn btn-success">Pesquisar pictograma</button>
+                    </div>
+                        <div id="FileUpload1" class="col-md-6" style="display: none;">
+                            <div class="uploadButton">
+                                <input id="file1" type="file" name="file"/>
+                            </div>
+                             <button type="button" class="btn btn-success" value="Fazer upload da imagem" >Fazer upload da imagem</button>
+                        </div> 
+                     <div id="painel1" class="col-md-6" >
+                     </div>
+                     <div id="selectedPainel1" class="col-md-6">
+                     
+
+                      @foreach (var url in js.Deserialize<List<string>>(Model.urls))
+                      {
+                
+                        <div class="wrapper">
+                            <img class="img" src= "@url" style="height: 100px; width: 100px" />
+                        </div>
+                
+                      }
+                      
+                     </div>
+                    </div>
+            }
+            }
+            <label id ="NoPictogramsError1"></label>
+            <div style="clear: both"></div>
+            <p></p>
+            <input id="datetimepicker4" type="text" style="display: none;">
+            <button id="button2" type="submit" class="btn btn-success" value="Submit">Editar lembrete</button>
+
+        </div>
+          </form>
+     </div>
+<script>
+    $('#datetimepicker4').datetimepicker({
+        format: 'd.m.Y H:i',
+        inline: true,
+        lang: 'pt',
+        theme: 'dark',
+        minDate: '-1970/01/01',
+        startDate: new Date("@Model.date @Model.time"),
+            time: '07:00', formatTime: 'H:i',
+
+
+    });
+
+  
+
+    function editReminder() {
+
+        var datetimer = $('#datetimepicker4')[0];
+        var test = $(datetimer).next();
+        var calendar = $(test).find("[class*=xdsoft_current]");
+        var dateCurrent = calendar[2];
+        var timeCurrent = calendar[3];
+
+        var date = dateCurrent.getAttribute("data-year") + "-" + (parseInt(dateCurrent.getAttribute("data-month")) + 1) + "-" + dateCurrent.getAttribute("data-date");
+        var timer = timeCurrent.getAttribute("data-hour") + ":" + timeCurrent.getAttribute("data-minute");
+
+        var urls = new Array();
+        var painel = $("#selectedPainel1");
+        if (painel !== 'undefined') {
+            var imgs = $(painel).find('img.img');
+            if (imgs.length == 0) { $('#NoPictogramsError1').html("Não tem pictogramas selecionados"); return; }
+            for (var i = 0; i < imgs.length; i++) {
+                urls[i] = imgs[i].getAttribute("src");
+            }
+        }
+
+        var idx;
+        var id = @Html.Raw(Json.Encode(Model))
+            idx = id.id;
+            var title = $("#title1").val();
+            var description = $("#description1").val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/Reminder/EditReminder',
+                data: {
+                    id: idx,
+                    title: title,
+                    description: description,
+                    date: date,
+                    time: timer,
+                    urls: JSON.stringify(urls),
+                    contact: id.contact
+                },
+                traditionel: true,
+                success: function (data, textStatus, xhr) {
+                    alert("O seu lembrete foi alterado com sucesso")
+                }
+            });
+    }
+
+    function DeleteReminder(divParent,reminderId) {
+        
+        $.ajax({
+            type: 'DELETE',
+            url: '/Reminder/DeleteReminder',
+            data: {
+                id: reminderId,
+            },
+            traditionel: true,
+            success: function (data, textStatus, xhr) {
+                $(divParent).remove();
+                var link = $('#links').find("a[ReminderId='" + reminderId + "']");
+                $(link[0]).remove();
+            },
+            statusCode: {
+                404: function () {
+                    $(divParent).remove();
+                    var link = $('#links').find("a[ReminderId='" + reminderId + "']");
+                    $(link).remove();
+                }
+            }
+        });
+    }
+
+</script>
