@@ -133,7 +133,7 @@ namespace MvcApplication2.DataModel
                         insertCommand.Parameters.AddWithValue("@code", code);
                         insertCommand.Parameters.AddWithValue("@status", status);
                         insertCommand.Parameters.AddWithValue("@EmailId", username);
-                        insertCommand.Parameters.AddWithValue("@creationDate", DateTime.Now);
+                        insertCommand.Parameters.AddWithValue("@creationDate", DateTime.UtcNow);
                         insertCommand.Transaction = trans;
 
                         insertCommand.ExecuteScalar();
@@ -880,7 +880,7 @@ namespace MvcApplication2.DataModel
                 con.Open();
 
                 SqlCommand deleteCommand = new SqlCommand("Delete from Temporary_Codes where code>@code AND DATEADD(MINUTE, 5, creationDate) <  @mydate",con);
-                deleteCommand.Parameters.AddWithValue("@mydate", DateTime.Now);
+                deleteCommand.Parameters.AddWithValue("@mydate", DateTime.UtcNow);
                 deleteCommand.Parameters.AddWithValue("@code", 0);
 
                 deleteCommand.ExecuteNonQuery();
