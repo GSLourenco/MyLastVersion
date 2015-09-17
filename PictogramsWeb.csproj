@@ -123,14 +123,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\API\AccountController.cs" />
+    <Compile Include="Controllers\API\ContactController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PictogramsController.cs" />
+    <Compile Include="Controllers\API\PictogramsController.cs" />
     <Compile Include="Controllers\ReminderController.cs" />
-    <Compile Include="Controllers\RemindersController.cs" />
-    <Compile Include="Controllers\TokenController.cs" />
+    <Compile Include="Controllers\API\RemindersController.cs" />
+    <Compile Include="Controllers\API\TokenController.cs" />
     <Compile Include="DataModel\SetTrafficJob.cs" />
     <Compile Include="DataModel\DatabaseJob.cs" />
     <Compile Include="DataModel\JobScheduler.cs" />
@@ -172,7 +172,9 @@
     <Content Include="Content\jquery.js" />
     <Content Include="Content\mycss.css" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -222,7 +224,9 @@
     <Content Include="Views\Reminder\ReminderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App.config" />
+    <Content Include="App.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Reminder\GetHistorical.cshtml" />

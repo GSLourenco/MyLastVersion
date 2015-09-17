@@ -13,7 +13,6 @@ namespace MvcApplication2.DataModel
     public static class PictogramsDb
     {
         static string connectionString = "Server=a439bc53-85c1-49f7-8c5a-a46b015ffb69.sqlserver.sequelizer.com;Database=dba439bc5385c149f78c5aa46b015ffb69;User ID=svjhkfovzvikurmt;Password=Vop7sKzFtMm2gRYNnxRRjtGpzF4BPM77mTbw52thxX7SbPRmbPnx8TKAP8EUP6YP;";
-        static SqlConnection conn;
         static List<Reminder> reminders = new List<Reminder>();
 
         //Db for Codes
@@ -24,7 +23,7 @@ namespace MvcApplication2.DataModel
             List<TemporaryCode> list = new List<TemporaryCode>();
 
            
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();
@@ -58,7 +57,7 @@ namespace MvcApplication2.DataModel
             SqlTransaction trans;
             String[] response=null;
 
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();
@@ -82,7 +81,7 @@ namespace MvcApplication2.DataModel
                     }
 
 
-                    String status = "Code already inserted";
+                    String status = "´Código já foi inserido";
 
                     SqlCommand updateCommand = new SqlCommand("UPDATE Temporary_Codes SET status = @status, code = @code Where EmailId=@Email AND contact=@contact", conn);
                     updateCommand.Parameters.AddWithValue("@contact", response[0]);
@@ -157,7 +156,7 @@ namespace MvcApplication2.DataModel
         //See if token exists- identify one contact
         public static String[] ValidateToken(String token)
         {
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();
@@ -183,7 +182,7 @@ namespace MvcApplication2.DataModel
             int id = -1;
 
 
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();
@@ -210,7 +209,7 @@ namespace MvcApplication2.DataModel
         {
             List<PictogramModel> list = new List<PictogramModel>();
 
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();
@@ -249,7 +248,7 @@ namespace MvcApplication2.DataModel
         {
             String id = String.Empty;
 
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();
@@ -275,7 +274,7 @@ namespace MvcApplication2.DataModel
         {
             List<String> usernames = new List<String>();
 
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();
@@ -305,8 +304,8 @@ namespace MvcApplication2.DataModel
              String contact = r.contact;
              SqlTransaction trans;
 
-             
-                 using (conn = new SqlConnection())
+
+             using (SqlConnection conn = new SqlConnection())
                  {
                      conn.ConnectionString = connectionString;
                      conn.Open();
@@ -365,7 +364,7 @@ namespace MvcApplication2.DataModel
             SqlTransaction trans;
 
 
-                using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
                 {
 
                     conn.ConnectionString = connectionString;
@@ -434,7 +433,7 @@ namespace MvcApplication2.DataModel
         public static IEnumerable<Reminder> getAllReminders(int contact,String user)
         {
             List<Reminder> reminders = new List<Reminder>();
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();
@@ -471,7 +470,7 @@ namespace MvcApplication2.DataModel
         {
             SqlTransaction trans;
             Boolean check = false;
-                using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
                 {
                     conn.ConnectionString = connectionString;
                     conn.Open();
@@ -520,9 +519,9 @@ namespace MvcApplication2.DataModel
         //-> Testar
         internal static void storeUserCredentials(string contact, string registration_id, string EncryptedToken,String username)
         {
-            
 
-                using (conn = new SqlConnection())
+
+            using (SqlConnection conn = new SqlConnection())
                 {
                     conn.ConnectionString = connectionString;
                     conn.Open();
@@ -544,8 +543,8 @@ namespace MvcApplication2.DataModel
         {
             SqlTransaction trans;
             int idx = -1;
-           
-                using (conn = new SqlConnection())
+
+            using (SqlConnection conn = new SqlConnection())
                 {
 
                     conn.ConnectionString = connectionString;
@@ -618,7 +617,7 @@ namespace MvcApplication2.DataModel
 
         internal static bool checkIfUserExists(string mvcuser,string username)
         {
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();
@@ -662,7 +661,7 @@ namespace MvcApplication2.DataModel
         internal static Boolean checkIfReminderIsFromThisUser(int id, string mvcuser)
         {
 
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
 
                 conn.ConnectionString = connectionString;
@@ -688,7 +687,7 @@ namespace MvcApplication2.DataModel
         internal static void EditReminder(Reminder r)
         {
 
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();
@@ -709,7 +708,7 @@ namespace MvcApplication2.DataModel
         {
             SqlTransaction trans;
 
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();
@@ -752,7 +751,7 @@ namespace MvcApplication2.DataModel
 
         internal static string getUserName(int id)
         {
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();
@@ -778,7 +777,7 @@ namespace MvcApplication2.DataModel
         {
             List<ContactModel> usernames = new List<ContactModel>();
 
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();
@@ -805,7 +804,7 @@ namespace MvcApplication2.DataModel
         internal static IEnumerable<Reminder> GetHistoricalReminders(string user, int contact)
         {
               List<Reminder> reminders = new List<Reminder>();
-            using (conn = new SqlConnection())
+              using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();
@@ -840,7 +839,7 @@ namespace MvcApplication2.DataModel
         internal static Reminder getHistoricalReminder(int idx, string name)
         {
             Reminder r = null;
-            using (conn = new SqlConnection())
+            using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = connectionString;
                 conn.Open();

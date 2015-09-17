@@ -21,6 +21,7 @@ namespace MvcApplication2.DataModel
         static string server = "https://s3.eu-central-1.amazonaws.com/";
         static string connectionString = "Server=a439bc53-85c1-49f7-8c5a-a46b015ffb69.sqlserver.sequelizer.com;Database=dba439bc5385c149f78c5aa46b015ffb69;User ID=svjhkfovzvikurmt;Password=Vop7sKzFtMm2gRYNnxRRjtGpzF4BPM77mTbw52thxX7SbPRmbPnx8TKAP8EUP6YP;";
         public const int ImageMinimumBytes = 512;
+        public const int ImageMaximumBytes = 2000000;
 
         static void Main(string[] args)
         {
@@ -36,6 +37,8 @@ namespace MvcApplication2.DataModel
 
         public static bool IsImage(HttpPostedFileBase postedFile)
         {
+            if (postedFile.ContentLength > ImageMaximumBytes)
+                return false;
             //-------------------------------------------
             //  Check the image mime types
             //-------------------------------------------
@@ -110,17 +113,19 @@ namespace MvcApplication2.DataModel
 
         public static String putObject(HttpPostedFileBase file,String name)
         {
-            String url = server +bucket +"/"+ file.FileName;;
+            String filename = name + file.FileName;
+            String url = server +bucket +"/"+ filename;
+            
             using (client = new AmazonS3Client(Amazon.RegionEndpoint.EUCentral1))
             {
      
                //Check if file exists
-                var s3FileInfo = new Amazon.S3.IO.S3FileInfo(client, bucket,file.FileName);
+                var s3FileInfo = new Amazon.S3.IO.S3FileInfo(client, bucket,filename);
                 if (s3FileInfo.Exists)
                 {
                     GetObjectMetadataRequest request = new GetObjectMetadataRequest();
                     request.BucketName = bucket;
-                    request.Key = file.FileName;
+                    request.Key = filename;
 
                     GetObjectMetadataResponse response = client.GetObjectMetadata(request);
                     //Get tag from Amazon file
@@ -147,7 +152,7 @@ namespace MvcApplication2.DataModel
                     request.CannedACL = S3CannedACL.PublicRead;
                     request.BucketName = bucket;
                     request.ContentType = file.ContentType;
-                    request.Key = file.FileName;
+                    request.Key = filename;
                     request.InputStream =file.InputStream;
                     client.PutObject(request);
 
@@ -160,18 +165,36 @@ namespace MvcApplication2.DataModel
             return url;
         }
 
+        public static Boolean validAmazonUri(String [] urls)
+        {
+            using (client = new AmazonS3Client(Amazon.RegionEndpoint.EUCentral1))
+            {
+                for (int i = 0; i < urls.Length; i++)
+                {
+
+                    String[] param = urls[i].Split('/');
+                    if (param.Length != 5) return false;
+
+                    var s3FileInfo = new Amazon.S3.IO.S3FileInfo(client, param[3], param[4]);
+                    if (!s3FileInfo.Exists) return false;
+                }
+                return true;
+            }
+        }
+
         public static String ReplaceObject(HttpPostedFileBase file,String name)
         {
-            String url = server + bucket + "/" + file.FileName; ;
+            String filename = name + file.FileName;
+            String url = server + bucket + "/" + filename; ;
 
             using (client = new AmazonS3Client(Amazon.RegionEndpoint.EUCentral1))
             {
-                 var s3FileInfo = new Amazon.S3.IO.S3FileInfo(client, bucket,file.FileName);
+                 var s3FileInfo = new Amazon.S3.IO.S3FileInfo(client, bucket,filename);
                  if (s3FileInfo.Exists)
                  {
                      DeleteObjectRequest drequest = new DeleteObjectRequest();
                      drequest.BucketName = bucket;
-                     drequest.Key = file.FileName;
+                     drequest.Key = filename;
                      client.DeleteObject(drequest);
                  }
 

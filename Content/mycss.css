@@ -96,24 +96,84 @@ div.container {
     
 }
 
-#painel {
-    float: left;
-    display: inline-block;
-}
 
 .right-div {
     border: 5px solid;
-     width: 45%; 
+     width: 48%; 
      float: right; 
-     height: 320px;
-}
-.left-div {
-    border: 5px solid;
-     width: 45%; 
-     float: left; 
-     height: 320px;
+     height: 330px;
+     overflow-y:auto;
+      display: inline-block;
 }
 
+.links-div {
+    border: 5px solid;
+     float: right; 
+     overflow-y:auto;
+      display: inline-block;
+}
+
+.left-div {
+    display: inline-block;
+    overflow-y:auto;
+    border: 5px solid;
+     width: 48%; 
+     float: left; 
+     height: 330px;
+}
+
+.sbico {
+    background-image: url("images/Deep_Search.png");
+    background-repeat: no-repeat ;
+        display: inline-block;
+        color: transparent;
+    height: 24px;
+    width: 24px;
+}
+
+/*
+ *  STYLE 2
+ */
+
+#painel::-webkit-scrollbar-track,#painel1::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#painel::-webkit-scrollbar, #painel1::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+#painel::-webkit-scrollbar-thumb,#painel1::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #009933;
+}
+
+#selectedPainel::-webkit-scrollbar-track,#selectedPainel1::-webkit-scrollbar-track1
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#selectedPainel::-webkit-scrollbar,#selectedPainel1::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+#selectedPainel::-webkit-scrollbar-thumb,#selectedPainel1::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #009933;
+}
 
 img.img-rounded {
     margin-left:5px; 
@@ -145,6 +205,8 @@ input[name="datepicker"] {
     opacity:0;
 }
 
+input.radio { display: inline; }
+
 .uploadButton {
     position:relative;
     overflow:hidden;
@@ -158,5 +220,33 @@ input[name="datepicker"] {
 .uploadButton:hover {
     opacity:1;   
 }
+
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}
+
+
 
 

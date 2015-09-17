@@ -144,7 +144,7 @@ namespace MvcApplication2.Controllers
         {
             String error = "";
             bool ModelError=false; bool UriError=false;
-            if ((ModelError= !this.ModelState.IsValid) || reminder == null || (UriError=!Utils.checkUri(reminder.urls)))
+            if ((ModelError= !this.ModelState.IsValid) || reminder == null)// || (UriError=!Utils.checkUri(reminder.urls)))
             {
                 if (ModelError)
                 {
@@ -156,7 +156,7 @@ namespace MvcApplication2.Controllers
                         }
                     }
                 }
-                if (UriError) error +="Urls de imagem inválidos";
+                if (UriError) error += "Urls de imagem inválidos ou ultrapassou o limite de imagens num lembrete" + "<br/>";
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, error);
             }
 

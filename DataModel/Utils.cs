@@ -114,17 +114,20 @@ namespace MvcApplication2.DataModel
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
             String [] u = js.Deserialize<String []>(urls);
+            if (u.Length > 5) return false;
 
             for (int i = 0; i < u.Length; i++)
             {
                 Uri uriResult;
-                bool result = Uri.TryCreate(u[i], UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp
-                  || uriResult.Scheme == Uri.UriSchemeHttps);
+                String uri = u[i];
+                bool result = Uri.TryCreate(uri, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp
+                  || uriResult.Scheme == Uri.UriSchemeHttps) ;
                 if (!result) return false;
             }
-
-            return true;
+            return Program.validAmazonUri(u);
         }
+
+        
     }
 
     class ICustomPrincipal : IPrincipal

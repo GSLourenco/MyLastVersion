@@ -14,24 +14,27 @@
             <p></p>
             @{System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
             if(js.Deserialize<List<string>>(Model.urls).Count()>0){
-            <div id="container" class="container col-md-12" >
-                    <div class="col-md-12" id="pictogramMode">
+            
+                    <div  id="pictogramMode">
+                        <h4>Prefere pictogramas ou as suas próprias imagens?</h4>
                         <input type="radio" name="mode1" value="pict" checked="checked" class="checkthis form-group">Pesquisa de pictogramas<br>
                         <input type="radio" name="mode1" class="checkthis form-group">Upload de Imagem<br>
                     </div>
-                     <div class="col-md-12" id="searchbox1">
-                         @Html.TextBox("name1", "", new { @class = "form-control", placeholder = "Inserir palavra ou expressão" })
-                         <button type="button" class="btn btn-success">Pesquisar pictograma</button>
+                     <div id="searchbox1">
+                         @Html.TextBox("name1", "", new { @style = "float: left;width:95%", @class = "form-control", placeholder = "Inserir palavra ou expressão" })
+                         <button type="button" style="float: right;height:34px;width:5%" class="btn btn-success">
+                             <span class="sbico"></span>
+                         </button>
                     </div>
-                        <div id="FileUpload1" class="col-md-6" style="display: none;">
+                        <div id="FileUpload1" class="col-md-8 left-div" style="display: none;">
                             <div class="uploadButton">
                                 <input id="file1" type="file" name="file"/>
                             </div>
                              <button type="button" class="btn btn-success" value="Fazer upload da imagem" >Fazer upload da imagem</button>
                         </div> 
-                     <div id="painel1" class="col-md-6" >
+                     <div id="painel1" class="col-md-8 left-div" >
                      </div>
-                     <div id="selectedPainel1" class="col-md-6">
+                     <div id="selectedPainel1" class="col-md-8 right-div">
                      
 
                       @foreach (var url in js.Deserialize<List<string>>(Model.urls))
@@ -44,13 +47,30 @@
                       }
                       
                      </div>
-                    </div>
             }
             }
             <label id ="NoPictogramsError1"></label>
             <div style="clear: both"></div>
             <p></p>
-            <input id="datetimepicker4" type="text" style="display: none;">
+            <div style="clear: both"></div>
+                     <div class="container" style="border: 5px solid;width:100%;" >
+                         <h4>Escolha a data e possibilidade de repetição do alarme</h4>
+                         <div class="col-md-6">
+                        <input id="datetimepicker4" type="text" style="display: none;">
+                          </div>
+                         <div id="weekrepeat container1" class="col-md-3">
+                        <input type="checkbox" name="week repeat" value="enable week repeat"> Repetir semanalmente<br>
+                        <div id ="days-of-week">
+                        <input type ="radio" value="7" class="checkthis form-group"> Domingo<br>
+                        <input type ="radio" value="1" class="checkthis form-group"> Segunda-Feira<br>
+                        <input type ="radio" value="2" class="checkthis form-group"> Terça-Feira<br>
+                        <input type ="radio" value="3" class="checkthis form-group"> Quarta-Feira<br>
+                        <input type ="radio" value="4" class="checkthis form-group"> Quinta-Feira<br>
+                        <input type ="radio" value="5" class="checkthis form-group"> Sexta-Feira<br>
+                        <input type ="radio" value="6" class="checkthis form-group"> Sábado<br>
+                        </div>
+                        </div>
+                     </div>
             <button id="button2" type="submit" class="btn btn-success" value="Submit">Editar lembrete</button>
 
         </div>

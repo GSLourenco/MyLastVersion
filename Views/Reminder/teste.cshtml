@@ -52,7 +52,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/Home/LogOut">LogOut</a>
+                <a class="navbar-brand" href="/Home/LogOut">Sair</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -62,7 +62,6 @@
                 <ul class="dropdown-menu">
                     <li><a href="/Contacts/GenerateCode">Adicionar Contacto</a></li>
                     <li><a href="/Contacts/ManageContacts">Lista de Contactos</a></li>
-                    <li><a href="#">Histórico</a></li>
                 </ul>
             </li>
                    
@@ -71,8 +70,7 @@
                     <li class="dropdown">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Lembretes<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/Reminder/SelectContact">Adicionar Lembretes</a></li>
-                    <li><a href="#">Editar ou eliminar lembretes</a></li>
+                    <li><a href="/Reminder/SelectContact">Adicionar/Editar/Eliminar Lembretes</a></li>
                 </ul>
             </li>
                    
@@ -89,19 +87,19 @@
             <div class="stepwizard-row setup-panel">
                 <div class="stepwizard-step">
                     <a id="noPrevious" href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
-                    <p>Step 1</p>
+                    <p>Passo 1</p>
                 </div>
                 <div class="stepwizard-step">
-                    <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
-                    <p>Step 4</p>
+                    <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                    <p>Passo 2</p>
                 </div>
                 <div class="stepwizard-step">
-                    <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-                    <p>Step 2</p>
+                    <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                    <p>Passo 3</p>
                 </div>
                 <div class="stepwizard-step">
-                    <a id ="stepwizard3" href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-                    <p>Step 3</p>
+                    <a id ="stepwizard3" href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                    <p>Passo 4</p>
                 </div>
             </div>
         </div>
@@ -109,7 +107,7 @@
         <div class="col-md-12 setup-content" style="background: rgba(245, 239, 239, 1)" id="step-1">
             <div class="col-md-6">
                 
-                <h4>Step 1- Escolha o contacto para quem quer enviar lembretes</h4>
+                <h4>Passo 1- Escolha o contacto para quem quer enviar lembretes</h4>
                 <h4>Lista de contactos</h4>
                 <div class="table-responsive">
 
@@ -129,6 +127,7 @@
                             {
                                 <tr>
                                     <td>
+
                                         <input type="radio" name="contact" value="@c" class="checkthis form-group"></td>
                                     <td>
                                         
@@ -148,7 +147,7 @@
                             @ViewBag.Message;
                         }
                     </label>
-                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Seguinte</button>
                 </div>
             </div>
             <div class="col-md-6">
@@ -158,15 +157,16 @@
         </div>
          <div class="row setup-content" id="step-4">
                 <div class="row">
+                    <h4>Passo 2- Escolha o tipo de lembrete a enviar</h4>
                     <input type ="radio" name="reminder" value="1" checked="checked" class="checkthis form-group"> Lembrete com Pictogramas<br>
                     <input type ="radio" name="reminder" value="2" class="checkthis form-group"> Lembrete sem Pictogramas<br>
-                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Seguinte</button>
                 </div>
         </div>
         <div class="row setup-content"  id="step-2">
             <div class="col-md-12">
                 <div class="col-md-12">
-                    <h3>Step 2</h3>
+                    <h3>Passo 3-Personalize o seu lembrete</h3>
                     
                     <div id="dialog-confirm"></div>
                     <form role="form" action="/Reminder/addReminder" method="post" onsubmit="addReminder();return false;">
@@ -174,15 +174,18 @@
                     <p></p>
                     <input id="description" maxlength="150" type="text" required="required" class="form-control" placeholder="Inserir descrição do lembrete" />
                     <p></p>
- 
-                    <div id="container" class="container col-md-12" >
-                    <div class="col-md-12" id="pictogramMode">
-                        <input type="radio" name="mode" value="pict" checked="checked" class="checkthis form-group">Pesquisa de pictogramas<br>
+                    <p></p>
+                  
+                    <div id="pictogramMode">
+                        <h4>Prefere pictogramas ou as suas próprias imagens?</h4>
+                        <input type="radio" name="mode" value="pict" checked="checked" class="checkthis form-group"><strong>Pesquisa de pictogramas</strong><br >
                         <input type="radio" name="mode" class="checkthis form-group">Upload de Imagem<br>
                     </div>
-                     <div class="col-md-12" id="searchbox">
-                         @Html.TextBox("name", "", new { @class = "form-control", placeholder = "Inserir palavra ou expressão" })
-                         <button type="button" class="btn btn-success">Pesquisar pictograma</button>
+                     <div id="searchbox">
+                         @Html.TextBox("name", "", new { @style = "float: left;width:95%", @class = "form-control", placeholder = "Inserir palavra ou expressão" })
+                         <button type="button" style="float: right;height:34px;width:5%" class="btn btn-success">
+                             <span class="sbico"></span>
+                         </button>
                     </div>
                     <div class="">
                         <div id="FileUpload" class="col-md-6 left-div" style="display: none;">
@@ -195,12 +198,13 @@
                      <div id="painel" class="col-md-6 left-div" ></div>
                      <div id="selectedPainel" class="col-md-6 right-div"></div>
                     </div>
-                        </div>
+                        
                     <label id ="NoPictogramsError"></label>
                     <div style="clear: both"></div>
                     <p></p>
                     <div style="clear: both"></div>
-                     <div class="container col-md-12" >
+                     <div class="container" style="border: 5px solid;width:100%;" >
+                         <h4>Escolha a data e possibilidade de repetição do alarme</h4>
                          <div class="col-md-4">
                         <input id="datetimepicker3" name="datepicker" type="text" style="display: none;">
                           </div>
@@ -221,7 +225,7 @@
                         <button id="button2" type="submit" class="btn btn-success" value="Submit">Adicionar Lembrete</button>
                     </div>
                     
-                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Seguinte</button>
                     </form>
                     <label id="ReminderError"></label>
                 </div>
@@ -229,8 +233,8 @@
         </div>
         <div class="row setup-content" id="step-3">
                 <div class="row">
-                    <h3>Step 3</h3>
-                    <div id ="links" class="col-md-2"></div>
+                    <h3>Passo 4 - Edite e envie os seus lembretes</h3>
+                    <div id ="links" class="col-md-2 links-div"></div>
                     <div id="editdiv" class="col-md-10">
                     </div>
                     <a id="sendReminder" href="#">Enviar lembretes</a>
@@ -239,6 +243,7 @@
         </div>
         <!-- Fim container-->
     </div>
+    <div class="modal"><!-- Place at bottom of page --></div>
 </body>
 
 </html>
@@ -591,6 +596,11 @@
                             }
                         },
                         statusCode: {
+                            400: function () {
+                                $(event.data.lnk).remove();
+                            }
+                        },
+                        statusCode: {
                             500: function (data) {
                                 var newDoc = document.open("text/html", "replace");
                                 newDoc.write(data.responseText);
@@ -600,10 +610,10 @@
                     });
                 });
             },
-            statusCode: {
-                400: function (data) {
+            error: function(data){ 
+                if(data.status == "400"){ 
                     $("#ReminderError").html(data.statusText);
-                }
+                } 
             },
             statusCode: {
             500: function (data) {
@@ -626,6 +636,7 @@
             //Appending each file to FormData object
             formdata.append(fileInput.files[i].name, fileInput.files[i]);
         }
+        $("body").addClass("loading");
         //Creating an XMLHttpRequest and sending
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '/Reminder/UploadFile');
@@ -638,8 +649,7 @@
                     addImage(res,painel[0]);
                 }
                 if (xhr.status == 415) {
-                    $("#FileError").html("Formato de ficheiro selecionado é inválido");
-                    
+                    $("#FileError").html("Formato de ficheiro selecionado é inválido ou ultrapassou o limite de espaço para uma imagem");   
                 }
 
                 if (xhr.status == 403) {
@@ -677,6 +687,7 @@
                             xhr.open('POST', '/Reminder/ReplaceFile');
                             xhr.send(formdata);
 
+
                             xhr.onreadystatechange = function () {
                                 if (xhr.readyState == 4 ) {
                                     
@@ -708,7 +719,7 @@
                 });
                 }
             }
-        
+            $("body").removeClass("loading");
         return false;
     } 
         

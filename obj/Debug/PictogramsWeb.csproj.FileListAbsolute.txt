@@ -155,3 +155,34 @@ C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.xml
 C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Deployment.xml
 C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Razor.xml
 C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\obj\Debug\MvcApplication2.pdb
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\MvcApplication2.dll.config
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\MvcApplication2.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\MvcApplication2.pdb
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.Core.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\Quartz.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Helpers.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Razor.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Razor.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\AWS.SessionProvider.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\AWS.TraceListener.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\AWSSDK.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.pdb
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.Core.pdb
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.Core.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\Quartz.pdb
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\Quartz.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\Microsoft.Web.Infrastructure.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Helpers.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Mvc.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Razor.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Razor.xml
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\obj\Debug\PictogramsWeb.csprojResolveAssemblyReference.cache
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\obj\Debug\MvcApplication2.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\obj\Debug\MvcApplication2.pdb
