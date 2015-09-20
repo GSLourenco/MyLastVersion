@@ -183,3 +183,5 @@ C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Razor
 C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\obj\Debug\MvcApplication2.dll
 C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\obj\Debug\MvcApplication2.pdb
 C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\obj\Debug\PictogramsWeb.csprojResolveAssemblyReference.cache
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\nunit.framework.dll
+C:\Users\pcmultimedia\Dropbox\Projeto\Gonçalo\Mvc\bin\nunit.framework.xml
