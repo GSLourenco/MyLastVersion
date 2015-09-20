@@ -16,7 +16,7 @@ namespace MvcApplication2.Controllers
         public HttpResponseMessage ValidateLogIn(LoginModel log)
         {
             if (log.EmailId == null || log.Password == null)
-                return this.Request.CreateResponse(HttpStatusCode.BadRequest,ModelState);
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest);
 
             try
             {
