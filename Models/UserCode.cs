@@ -11,7 +11,7 @@ namespace MvcApplication2.Models
     {
         [StringLength(5,MinimumLength = 5)]
         public string code { get; set; }
-        //[StringLength(5, MinimumLength = 5)]
+        [StringLength(152, MinimumLength = 152)]
         public string registration_id { get; set; }
     }
 }

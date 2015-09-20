@@ -96,7 +96,13 @@ div.container {
     
 }
 
+label.error {
+color: #C00;      
+font-size: 85%;       
 
+font-weight: normal      
+;text-transform: uppercase; 
+}
 .right-div {
     border: 5px solid;
      width: 48%; 
@@ -107,10 +113,10 @@ div.container {
 }
 
 .links-div {
-    border: 5px solid;
      float: right; 
      overflow-y:auto;
       display: inline-block;
+      height: 250px;
 }
 
 .left-div {

@@ -19,14 +19,20 @@
     <title>Pictogramas WEB - Envio de lembretes</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" href="../../Content/jquery.datetimepicker.css"/ >
+    
+    <link rel="stylesheet" type="text/css" href="/Content/jquery.datetimepicker.css"/ >
     <link rel="stylesheet" href="/Content/mycss.css">
+    <link rel="stylesheet" href="/Content/jquery.timeselector.css">
+    
 
+    
+    
     <script>"https://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.js"</script>
     <script>"https://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.min.js"</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="../../Content/jquery.datetimepicker.js"></script>
+    <script src="/Content/jquery.datetimepicker.js"></script>
+    <script src="/Content/jquery.timeselector.js"></script>
     <script src="../../Content/myjavascript.js"></script>
     <link rel="stylesheet" href="../../Content/jquery-ui.min.css">
     <script src="../../Content/jquery-ui.min.js"></script>
@@ -40,18 +46,68 @@
 
     <style type="text/css"></style>
 </head>
-<body>
-    <div id ="links" class="col-md-2">
+<body style="background: LightGray">
+
+     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container" >
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header" >
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Home/LogOut">Sair</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Contactos<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/Contacts/GenerateCode">Adicionar Contacto</a></li>
+                    <li><a href="/Contacts/ManageContacts">Lista de Contactos</a></li>
+                </ul>
+            </li>
+                   
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Lembretes<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/Reminder/SelectContact">Adicionar/Editar/Eliminar Lembretes</a></li>
+                </ul>
+            </li>
+                   
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <div id ="links" class="col-md-2 links-div" style="margin-top: 60px;">
+        <h4>Lista de lembretes</h4>
         @foreach (var reminder in Model)
         {
             <a  onClick="DetailHistoricalReminder(@reminder.id)">Lembrete : @reminder.title</a>
         }
     </div>
-    <div id="editdiv" class="col-md-10"></div>
+    <div id="editdiv" class="col-md-10" style="margin-top: 60px;">
+
+    </div>
 </body>
 </html>
 
 <script>
+
+    var d = "2015-9-19";
+    var params = d.split('-');
+    if (params[1].length == 1) params[1] = '0' + params[1];
+    if (params[2].length == 1) params[2] = '0' + params[2];
+
+    var d = params[0] +"-"+ params[1] + "-"+ params[2];
+
     function DetailHistoricalReminder(id, contact) {
         $.ajax({
             type: 'GET',

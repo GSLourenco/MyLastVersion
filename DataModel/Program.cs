@@ -16,7 +16,7 @@ namespace MvcApplication2.DataModel
 {
     public static class Program
     {
-        static IAmazonS3 client;
+        
         static string bucket = "temporary-pictograms";
         static string server = "https://s3.eu-central-1.amazonaws.com/";
         static string connectionString = "Server=a439bc53-85c1-49f7-8c5a-a46b015ffb69.sqlserver.sequelizer.com;Database=dba439bc5385c149f78c5aa46b015ffb69;User ID=svjhkfovzvikurmt;Password=Vop7sKzFtMm2gRYNnxRRjtGpzF4BPM77mTbw52thxX7SbPRmbPnx8TKAP8EUP6YP;";
@@ -27,9 +27,9 @@ namespace MvcApplication2.DataModel
         {
 
 
-            using (client = new AmazonS3Client(Amazon.RegionEndpoint.EUCentral1))
+            using (IAmazonS3 client = new AmazonS3Client(Amazon.RegionEndpoint.EUCentral1))
             {
-                ListingObjects();
+                ListingObjects(client);
             }
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -115,8 +115,8 @@ namespace MvcApplication2.DataModel
         {
             String filename = name + file.FileName;
             String url = server +bucket +"/"+ filename;
-            
-            using (client = new AmazonS3Client(Amazon.RegionEndpoint.EUCentral1))
+
+            using (IAmazonS3 client = new AmazonS3Client(Amazon.RegionEndpoint.EUCentral1))
             {
      
                //Check if file exists
@@ -167,7 +167,7 @@ namespace MvcApplication2.DataModel
 
         public static Boolean validAmazonUri(String [] urls)
         {
-            using (client = new AmazonS3Client(Amazon.RegionEndpoint.EUCentral1))
+            using (IAmazonS3 client = new AmazonS3Client(Amazon.RegionEndpoint.EUCentral1))
             {
                 for (int i = 0; i < urls.Length; i++)
                 {
@@ -187,7 +187,7 @@ namespace MvcApplication2.DataModel
             String filename = name + file.FileName;
             String url = server + bucket + "/" + filename; ;
 
-            using (client = new AmazonS3Client(Amazon.RegionEndpoint.EUCentral1))
+            using (IAmazonS3 client = new AmazonS3Client(Amazon.RegionEndpoint.EUCentral1))
             {
                  var s3FileInfo = new Amazon.S3.IO.S3FileInfo(client, bucket,filename);
                  if (s3FileInfo.Exists)
@@ -216,7 +216,7 @@ namespace MvcApplication2.DataModel
 
 
         }
-        static void ListingObjects()
+        static void ListingObjects(IAmazonS3 client)
         {
             ListObjectsRequest list = new ListObjectsRequest
             {

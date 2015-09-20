@@ -21,8 +21,7 @@ namespace MvcApplication2.Controllers
 {
     public class ContactsController : Controller
     {
-        //
-        // GET: /Contacts/
+        
 
         [HttpPost, Authorize]
         public ActionResult GenerateCode(String contact)
@@ -34,7 +33,7 @@ namespace MvcApplication2.Controllers
             }
 
            
-                //ver se o contacto já existe
+                //check if user exists
                 String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
                 int idx = PictogramsDb.getContactId(contact, name);
                 if (idx > 0)
@@ -42,7 +41,7 @@ namespace MvcApplication2.Controllers
                     ModelState.AddModelError("", "O contacto que quer adicionar já existe, escolha outro nome");
                     return View();
                 }
-
+                    
                 Random rnd = new Random();
                 int code = rnd.Next(10000, 99999);
                 String status = "Código não inserido";
@@ -79,15 +78,16 @@ namespace MvcApplication2.Controllers
         public ActionResult DeleteContact(String contact)
         {
 
-            if (!this.ModelState.IsValid || contact == null)
+            if (!this.ModelState.IsValid || contact == null || contact.Length>20)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
 
+            //only accepts ajaxrequest
             if (Request.IsAjaxRequest())
             {
+                //delete contact
                 String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-                bool check = PictogramsDb.DeleteUser(contact, name);
-                if (!check) return new HttpStatusCodeResult(HttpStatusCode.NoContent);
-                return new HttpStatusCodeResult(HttpStatusCode.OK);
+                PictogramsDb.DeleteUser(contact, name);
+                return new HttpStatusCodeResult(HttpStatusCode.NoContent);
             }
 
             return new HttpStatusCodeResult(HttpStatusCode.NotFound);

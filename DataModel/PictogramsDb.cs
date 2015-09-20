@@ -81,7 +81,7 @@ namespace MvcApplication2.DataModel
                     }
 
 
-                    String status = "´Código já foi inserido";
+                    String status = "Código já foi inserido";
 
                     SqlCommand updateCommand = new SqlCommand("UPDATE Temporary_Codes SET status = @status, code = @code Where EmailId=@Email AND contact=@contact", conn);
                     updateCommand.Parameters.AddWithValue("@contact", response[0]);
@@ -466,7 +466,7 @@ namespace MvcApplication2.DataModel
         }
 
         //Delete one reminder with id, check if reminder is from that user
-        internal static void DeleteReminder(int id,String mvcuser)
+        internal static Boolean DeleteReminder(int id,String mvcuser)
         {
             SqlTransaction trans;
             Boolean check = false;
@@ -493,7 +493,7 @@ namespace MvcApplication2.DataModel
 
                         }
 
-                        if (!check) return;
+                        if (!check) return false;
 
                         SqlCommand deleteCommand = new SqlCommand("Delete from Temporary_Reminders where ID = @ID", conn);
                         deleteCommand.Parameters.AddWithValue("@ID", id);
@@ -510,6 +510,7 @@ namespace MvcApplication2.DataModel
                     }
 
                 }
+            return true;
               
         }
 
@@ -861,6 +862,7 @@ namespace MvcApplication2.DataModel
                         r.urls = rdr["urls"].ToString();
                         r.title = rdr["title"].ToString();
                         r.description = rdr["description"].ToString();
+                        r.daysofweek = (int)rdr["daysofweek"];
 
                     }
 

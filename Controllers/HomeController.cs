@@ -45,7 +45,7 @@ namespace MvcApplication2.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult LogOn(Login model)
+        public ActionResult LogOn(LoginModel model)
         {
             if (ModelState.IsValid)
             {

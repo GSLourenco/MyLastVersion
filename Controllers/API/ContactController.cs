@@ -21,58 +21,53 @@ namespace MvcApplication2.Controllers
 
             List<ContactModel> list = PictogramsDb.getUsersModelFrom(email);
             return list;
-
         }
 
         [BasicAuthenticationAttributeWithPassword]
         public HttpResponseMessage CreateContact(String contact)
         {
-            if (!this.ModelState.IsValid || contact.Trim() == "" || contact.Length > 20)
-            {
-                HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.BadRequest, "O contacto que inseriu não é válido");
-                return response;
+            if (!this.ModelState.IsValid || contact.Trim() == "" || contact.Length > 20){
+                return  this.Request.CreateResponse(HttpStatusCode.BadRequest, "O contacto que inseriu não é válido");
             }
 
             GenericIdentity idd = (GenericIdentity)System.Web.HttpContext.Current.User.Identity;
             String name = idd.Name;
+            //check if contact already exists
             int idx = PictogramsDb.getContactId(contact, name);
-            if (idx > 0)
-            {
-                HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.BadRequest, "O contacto que quer adicionar já existe, escolha outro nome");
-                return response;
+            if (idx > 0){
+               return this.Request.CreateResponse(HttpStatusCode.BadRequest, "O contacto que quer adicionar já existe, escolha outro nome");
             }
 
+            //generate random code to that contact
             Random rnd = new Random();
             int code = rnd.Next(10000, 99999);
             String status = "Código não inserido";
 
+            //try to insert code, if already exists, a new one is generated
             while (!PictogramsDb.InsertTemporaryCode(contact, code, status, name))
             {
                 code = rnd.Next(10000, 99999);
             }
 
-            HttpResponseMessage res = this.Request.CreateResponse(HttpStatusCode.Created,code);
-            return res;
-
+            return this.Request.CreateResponse(HttpStatusCode.Created,code);
         }
 
         [BasicAuthenticationAttributeWithPassword]
         public HttpResponseMessage DeleteContact(int id)
         {
             if (!this.ModelState.IsValid || id < 0)
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest));
+               return new HttpResponseMessage(HttpStatusCode.BadRequest);
 
             GenericIdentity idd = (GenericIdentity)System.Web.HttpContext.Current.User.Identity;
             String username = idd.Name;
+
             //check if reminder is from user
-
             String contactName = PictogramsDb.getUserName(id);
-            if (contactName == null) return this.Request.CreateResponse(HttpStatusCode.BadRequest);
+            if (contactName == null) return new HttpResponseMessage(HttpStatusCode.BadRequest);
 
-
-            bool check = PictogramsDb.DeleteUser(contactName, username);
-            if (!check) return this.Request.CreateResponse(HttpStatusCode.NotFound);
-            return this.Request.CreateResponse(HttpStatusCode.NoContent);
+            //delete contact
+            PictogramsDb.DeleteUser(contactName, username);
+            return new HttpResponseMessage(HttpStatusCode.NoContent);
         }
     }
 }

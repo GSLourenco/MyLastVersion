@@ -18,7 +18,7 @@ namespace MvcApplication2.Models
         public string date { get; set; }
 
         [Required]
-        [RegularExpression(@"\d{1,2}:\d{1,2}", ErrorMessage = "Formato de tempo inválido")]
+        [RegularExpression(@"\d{2,2}:\d{2,2}", ErrorMessage = "Formato de tempo inválido")]
         public string time { get; set; }
 
         

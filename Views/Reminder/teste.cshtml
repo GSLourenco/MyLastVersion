@@ -17,14 +17,20 @@
     <title>Pictogramas WEB - Envio de lembretes</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" href="../../Content/jquery.datetimepicker.css"/ >
+    
+    <link rel="stylesheet" type="text/css" href="/Content/jquery.datetimepicker.css"/ >
     <link rel="stylesheet" href="/Content/mycss.css">
+    <link rel="stylesheet" href="/Content/jquery.timeselector.css">
+    
 
+    
+    
     <script>"https://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.js"</script>
     <script>"https://cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.min.js"</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="../../Content/jquery.datetimepicker.js"></script>
+    <script src="/Content/jquery.datetimepicker.js"></script>
+    <script src="/Content/jquery.timeselector.js"></script>
     <script src="../../Content/myjavascript.js"></script>
     <link rel="stylesheet" href="../../Content/jquery-ui.min.css">
     <script src="../../Content/jquery-ui.min.js"></script>
@@ -90,11 +96,11 @@
                     <p>Passo 1</p>
                 </div>
                 <div class="stepwizard-step">
-                    <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                    <a id="noPrevious1" href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
                     <p>Passo 2</p>
                 </div>
                 <div class="stepwizard-step">
-                    <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                    <a id="noPrevious2" href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
                     <p>Passo 3</p>
                 </div>
                 <div class="stepwizard-step">
@@ -141,7 +147,7 @@
                         </tbody>
 
                     </table>
-                    <label id="errorNoContacts">
+                    <label id="errorNoContacts" class="error">
                         @if (ViewBag.Message != null)
                         {
                             @ViewBag.Message;
@@ -158,8 +164,15 @@
          <div class="row setup-content" id="step-4">
                 <div class="row">
                     <h4>Passo 2- Escolha o tipo de lembrete a enviar</h4>
-                    <input type ="radio" name="reminder" value="1" checked="checked" class="checkthis form-group"> Lembrete com Pictogramas<br>
-                    <input type ="radio" name="reminder" value="2" class="checkthis form-group"> Lembrete sem Pictogramas<br>
+                    <div class="col-md-6 mode-left">
+                        <input type ="radio" name="reminder" value="1" checked="checked" class="checkthis form-group"> Lembrete com Pictogramas<br>
+                        <img src="https://s3.eu-central-1.amazonaws.com/pictograms/pictogramas.png" />
+                    </div>
+                    <div class="col-md-6 mode-right">
+                        <input type ="radio" name="reminder" value="2" class="checkthis form-group"> Lembrete sem Pictogramas<br>
+                        <img src="https://s3.eu-central-1.amazonaws.com/pictograms/escrever_2.png" />
+                    </div>
+                    <p></p>
                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Seguinte</button>
                 </div>
         </div>
@@ -176,6 +189,7 @@
                     <p></p>
                     <p></p>
                   
+                    <div id="container">
                     <div id="pictogramMode">
                         <h4>Prefere pictogramas ou as suas próprias imagens?</h4>
                         <input type="radio" name="mode" value="pict" checked="checked" class="checkthis form-group"><strong>Pesquisa de pictogramas</strong><br >
@@ -192,14 +206,15 @@
                             <div class="uploadButton">
                                 <input id="file" type="file" name="file"/>
                             </div>
-                            <label id="FileError"></label>
+                            <label id="FileError" class ="error"></label>
                              <button type="button" class="btn btn-success" value="Fazer upload da imagem" >Fazer upload da imagem</button>
                         </div> 
                      <div id="painel" class="col-md-6 left-div" ></div>
                      <div id="selectedPainel" class="col-md-6 right-div"></div>
                     </div>
+                    </div>
                         
-                    <label id ="NoPictogramsError"></label>
+                    <label id ="NoPictogramsError" class="error"></label>
                     <div style="clear: both"></div>
                     <p></p>
                     <div style="clear: both"></div>
@@ -208,6 +223,8 @@
                          <div class="col-md-4">
                         <input id="datetimepicker3" name="datepicker" type="text" style="display: none;">
                           </div>
+                         <div class="col-md-4"> <input type="text" id="time1" size="10" /></div>
+                        
                          <div id="weekrepeat container" class="col-md-3">
                         <input type="checkbox" name="week repeat" value="enable week repeat"> Repetir semanalmente<br>
                         <div id ="days-of-week">
@@ -226,20 +243,23 @@
                     </div>
                     
                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Seguinte</button>
+                    <label id="ReminderError" class="error"></label>
                     </form>
-                    <label id="ReminderError"></label>
                 </div>
             </div>
         </div>
         <div class="row setup-content" id="step-3">
                 <div class="row">
                     <h3>Passo 4 - Edite e envie os seus lembretes</h3>
-                    <div id ="links" class="col-md-2 links-div"></div>
+                    <div id ="links" class="col-md-2 links-div">
+                      <h4>Lista de lembretes</h4>  
+                    </div>
                     <div id="editdiv" class="col-md-10">
                     </div>
-                    <a id="sendReminder" href="#">Enviar lembretes</a>
+                    <a id="sendReminder" href="#" style="color:red">Enviar lembretes</a>
                     
                 </div>
+                <label for="button2" id="EditReminderError" class="error"></label>
         </div>
         <!-- Fim container-->
     </div>
@@ -250,15 +270,23 @@
 <script type="text/javascript">
     var addRemindersCounted = 0;
 
+    $(function () {
+        $('#time1').timeselector();
+    });
+
 
     $('#datetimepicker3').datetimepicker({
         format: 'd.m.Y H:i',
         inline: true,
         lang: 'pt',
         theme: 'dark',
-        minDate: '-1970/01/01'
+        minDate: '-1970/01/01',
+        timepicker: false
 
     });
+
+
+
     var weeks = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"];
 
     $(document).ready(function () {
@@ -375,6 +403,7 @@
                 if (radioMode[0].value == 2) {
                     $("#container").remove();
                 }
+                $("#noPrevious1").attr("disabled", "disabled");
                 isValid = true;
             }
             else if (curStepBtn == "step-2") {
@@ -382,7 +411,10 @@
                     isValid = false;
                     alert("Ainda não adicionou um lembrete");
                 }
-                else isValid = true;
+                else {
+                    $("#noPrevious2").attr("disabled", "disabled");
+                    isValid = true;
+                }
             }
 
 
@@ -427,6 +459,7 @@
                 addCrossAndReplace(div)
             });
 
+
             $(".uploadButton").mousemove(function (e) {
                 var offL, offR, inpStart
                 offL = $(this).offset().left;
@@ -437,6 +470,8 @@
                     top: e.pageY - offT - 10
                 })
             });
+
+            
         
     }
 
@@ -481,7 +516,8 @@
                             },
                             statusCode: {
                             404: function() {
-                                $(event.data.lnk).remove();
+                                var link = $('#links').find("a[ReminderId='" + event.data.id + "']");
+                                $(link[0]).remove();
                             }
                             },
                             statusCode: {
@@ -508,15 +544,16 @@
 
     function addReminder() {
 
-        var radioMode = $("input[name='reminder']");
+       
+        var radioMode = $("input[name='reminder']:checked");
         var datetimer = $('#datetimepicker3')[0];
-        var test = $(datetimer).siblings("[class=xdsoft_datetimepicker xdsoft_dark xdsoft_noselect  xdsoft_inline]")[0];
+        var test = $(datetimer).siblings("[class=xdsoft_datetimepicker xdsoft_noselect xdsoft_dark xdsoft_inline]")[0];
         var calendar = $(test).find("[class*=xdsoft_current]");
         var dateCurrent = calendar[2];
-        var timeCurrent = calendar[3];
-
+        
+        var time = $('#time1')[0];
         var date = dateCurrent.getAttribute("data-year") + "-" + (parseInt(dateCurrent.getAttribute("data-month")) + 1) + "-" + dateCurrent.getAttribute("data-date");
-        var timer = timeCurrent.getAttribute("data-hour") + ":" + timeCurrent.getAttribute("data-minute");
+        var timer = time.value;
 
 
         var imgs = $("#selectedPainel").find('img.img');
@@ -536,10 +573,12 @@
         var inputsWeek = $("#days-of-week > :input");
         var anyBoxesChecked = [];
 
-      
         for (var i = 0; i < inputsWeek.length; i++) {
-            var check = $(inputsWeek[i]).is(':checked');
-            anyBoxesChecked.push(check);
+            if ($($("input[name='week repeat']")).is(':checked')) {
+                var check = $(inputsWeek[i]).is(':checked');
+                anyBoxesChecked.push(check);
+            }
+            else anyBoxesChecked.push(false);
         }
 
 
@@ -564,19 +603,19 @@
                 }
 
                 var rsp = xhr.responseText;
-                rsp = rsp.split(" ");
-                var idx = encodeURIComponent(rsp[0]);
+                var idx = encodeURIComponent(data.id);
                 var link = document.createElement("a");
                 link.setAttribute("ReminderId", idx);
-                link.textContent = "Lembrete: " + rsp[1];
+                link.textContent = "Lembrete: " + data.title;
                 $('#links').append(link);
                 $('#painel').empty();
                 $('#selectedPainel').empty();
                 $("#ReminderError").empty();
                 addRemindersCounted++;
+                alert("lembrete adicionado");
                 
                 $(link).on("click", {
-                    id: idx, usernam: rsp[2]
+                    id: idx, usernam: data.contact
                 }, function (event) {
 
                     $.ajax({
@@ -590,18 +629,18 @@
                             $('#editdiv').html(data);
                             ExecuteWhenPartialViewIsOn();
                         },
-                        statusCode: {
-                            404: function () {
-                                $(event.data.lnk).remove();
+                        error: function(data){ 
+                            if(data.status == "404"){ 
+                                var link = $('#links').find("a[ReminderId='" + event.data.id + "']");
+                                $(link[0]).remove();
                             }
-                        },
-                        statusCode: {
-                            400: function () {
-                                $(event.data.lnk).remove();
+
+                            if (data.status == "400") {
+                                var link = $('#links').find("a[ReminderId='" + event.data.id + "']");
+                                $(link[0]).remove();
                             }
-                        },
-                        statusCode: {
-                            500: function (data) {
+
+                            if (data.status == "500") {
                                 var newDoc = document.open("text/html", "replace");
                                 newDoc.write(data.responseText);
                                 newDoc.close();
@@ -613,15 +652,14 @@
             error: function(data){ 
                 if(data.status == "400"){ 
                     $("#ReminderError").html(data.statusText);
-                } 
-            },
-            statusCode: {
-            500: function (data) {
-                var newDoc = document.open("text/html", "replace");
-                newDoc.write(data.responseText);
-                newDoc.close();
+                }
+
+                if (data.status == "500") {
+                    var newDoc = document.open("text/html", "replace");
+                    newDoc.write(data.responseText);
+                    newDoc.close();
+                }
             }
-        }
         });
 
 

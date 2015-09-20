@@ -3,23 +3,6 @@
     div.remove();
 }
 
-$('#datetimepicker').datetimepicker({
-    dayOfWeekStart: 1,
-    lang: 'en',
-    disabledDates: ['1986/01/08', '1986/01/09', '1986/01/10'],
-    startDate: '1986/01/05'
-});
-
-$('#datetimepicker').datetimepicker({ value: '2015/04/15 05:03', step: 10 });
-
-$('#datetimepicker3').datetimepicker({
-    format: 'd.m.Y H:i',
-    inline: true,
-    lang: 'pt',
-    theme: 'dark',
-    minDate: '-1970/01/01',
-   
-});
 
 
 function addImage(res, painel) {

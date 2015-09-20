@@ -14,49 +14,37 @@ namespace MvcApplication2.Controllers
     public class TokenController : ApiController
     {
         [ActionName("PostCodeAndId")]
-        //[BasicAuthenticationAttributeWithPassword]
         public HttpResponseMessage PostCodeAndRegistrationId(UserCode uc)
         {
 
             if (!this.ModelState.IsValid || uc == null || uc.registration_id == String.Empty || uc.code == "0")
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest));
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
 
             String code=uc.code;
             String registration_id=uc.registration_id;
 
+            //check if code send is a number and it´s valid
             String[] arr;
-            try
-            {
+            try{
                 arr = PictogramsDb.ValidateCode(Int32.Parse(code));
             }
-            catch (FormatException e)
-            {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest));
+            catch (FormatException e){
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
             }
-            if(arr == null) throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+            //code was not valid
+            if(arr == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
             String contact = arr[0];
             String username = arr[1];
 
+            //generate token that is going to be used to synchronize reminders
             String token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
             String  EncryptedToken = Utils.GenerateSaltedSHA1(token);
 
+            //add user to contacts list
             PictogramsDb.storeUserCredentials(contact, registration_id, EncryptedToken,username);
-            HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.Created);
-
-            response.Content = new StringContent(token + " " + username);
-
-           
+            HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.Created, token + " " + username);
             return response;
 
-        }
-
-        [BasicAuthenticationAttributeWithPassword]
-        public HttpResponseMessage RefreshRegister(String token, String refresh_token)
-        {
-            if (!this.ModelState.IsValid || token == null || refresh_token == null)
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest));
-
-            return null;
         }
 
         [BasicAuthentication]
@@ -66,12 +54,11 @@ namespace MvcApplication2.Controllers
             String[] credentials = idd.Name.Split(new char[] { ' ' });
             
             String contactName=PictogramsDb.getUserName(Int32.Parse(credentials[0]));
-            if (contactName == null) return this.Request.CreateResponse(HttpStatusCode.BadRequest);
+            if (contactName == null) return new HttpResponseMessage(HttpStatusCode.BadRequest);
 
-
-            bool check= PictogramsDb.DeleteUser(contactName, credentials[1]);
-            if (!check) return this.Request.CreateResponse(HttpStatusCode.NotFound);
-            return this.Request.CreateResponse(HttpStatusCode.NoContent);
+            //dele user from contact list
+            PictogramsDb.DeleteUser(contactName, credentials[1]);
+            return new HttpResponseMessage(HttpStatusCode.NoContent);
 
         }
     }

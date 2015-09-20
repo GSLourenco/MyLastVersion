@@ -55,12 +55,13 @@
             <div style="clear: both"></div>
                      <div class="container" style="border: 5px solid;width:100%;" >
                          <h4>Escolha a data e possibilidade de repetição do alarme</h4>
-                         <div class="col-md-6">
+                         <div class="col-md-4">
                         <input id="datetimepicker4" type="text" style="display: none;">
                           </div>
+                         <div class="col-md-3"> <input type="text" id="time2" size="10" /></div>
                          <div id="weekrepeat container1" class="col-md-3">
-                        <input type="checkbox" name="week repeat" value="enable week repeat"> Repetir semanalmente<br>
-                        <div id ="days-of-week">
+                        <input type="checkbox" name="week repeat1" value="enable week repeat"> Repetir semanalmente<br>
+                        <div id ="days-of-week1">
                         <input type ="radio" value="7" class="checkthis form-group"> Domingo<br>
                         <input type ="radio" value="1" class="checkthis form-group"> Segunda-Feira<br>
                         <input type ="radio" value="2" class="checkthis form-group"> Terça-Feira<br>
@@ -81,15 +82,49 @@
         format: 'd.m.Y H:i',
         inline: true,
         lang: 'pt',
+        timepicker: false,
         theme: 'dark',
         minDate: '-1970/01/01',
-        startDate: new Date("@Model.date @Model.time"),
+        startDate: new Date("@Model.date"),
             time: '07:00', formatTime: 'H:i',
 
 
     });
 
+    $(function () {
+        $('#time2').timeselector();
+    });
+
+    $('#time2').val("@Model.time").timeselector('refresh');
+
+
   
+    $(document).ready(function () {
+        $("input[name='week repeat1']").click(function () {
+            if ($(this).is(':checked')) {
+                $($('#days-of-week1')).show();
+            }
+            else {
+                $($('#days-of-week1')).hide();
+            }
+        });
+
+        var days = "@Model.daysofweek";
+
+        if (days > 0) { $($("input[name='week repeat1']")).prop('checked', true); }
+        else $($('#days-of-week1')).hide();
+
+        var inputsWeek = $("#days-of-week1 > :input");
+        var mask = 1;
+        for (var i = 0; i < inputsWeek.length; i++) {
+            if ((mask & days) != 0) {
+                $(inputsWeek[i]).prop('checked', true);
+            }
+            mask = mask << 1;
+        }
+
+
+    });
 
     function editReminder() {
 
@@ -97,10 +132,10 @@
         var test = $(datetimer).next();
         var calendar = $(test).find("[class*=xdsoft_current]");
         var dateCurrent = calendar[2];
-        var timeCurrent = calendar[3];
 
+        var time = $('#time2')[0];
         var date = dateCurrent.getAttribute("data-year") + "-" + (parseInt(dateCurrent.getAttribute("data-month")) + 1) + "-" + dateCurrent.getAttribute("data-date");
-        var timer = timeCurrent.getAttribute("data-hour") + ":" + timeCurrent.getAttribute("data-minute");
+        var timer = time.value;
 
         var urls = new Array();
         var painel = $("#selectedPainel1");
@@ -112,6 +147,17 @@
             }
         }
 
+        var inputsWeek = $("#days-of-week1 > :input");
+        var anyBoxesChecked = [];
+
+        for (var i = 0; i < inputsWeek.length; i++) {
+            if ($($("input[name='week repeat1']")).is(':checked')) {
+                var check = $(inputsWeek[i]).is(':checked');
+                anyBoxesChecked.push(check);
+            }
+            else anyBoxesChecked.push(false);
+        }
+
         var idx;
         var id = @Html.Raw(Json.Encode(Model))
             idx = id.id;
@@ -121,18 +167,27 @@
             $.ajax({
                 type: 'POST',
                 url: '/Reminder/EditReminder',
-                data: {
-                    id: idx,
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    id:idx,
                     title: title,
                     description: description,
                     date: date,
                     time: timer,
                     urls: JSON.stringify(urls),
-                    contact: id.contact
-                },
+                    contact: id.contact,
+                    repeatingDays: anyBoxesChecked
+                }),
                 traditionel: true,
                 success: function (data, textStatus, xhr) {
-                    alert("O seu lembrete foi alterado com sucesso")
+                    alert("O seu lembrete foi alterado com sucesso");
+                    $("#EditReminderError").empty();
+                },
+                error: function (data) {
+                    if (data.status == "400") {
+                        $("#EditReminderError").html(data.statusText);
+                    }
+
                 }
             });
     }

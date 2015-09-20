@@ -114,7 +114,7 @@ namespace MvcApplication2.DataModel
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
             String [] u = js.Deserialize<String []>(urls);
-            if (u.Length > 5) return false;
+            if (u.Length > 6) return false;
 
             for (int i = 0; i < u.Length; i++)
             {

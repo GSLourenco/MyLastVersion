@@ -147,7 +147,7 @@
     <Compile Include="Models\BasicAuthenticationAttribute.cs" />
     <Compile Include="Models\BasicAuthenticationWithPasswordAttribute.cs" />
     <Compile Include="Models\ContactModel.cs" />
-    <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Models\TemporaryCode.cs" />
     <Compile Include="Models\PictogramModel.cs" />
@@ -165,10 +165,12 @@
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\myjavascript.js" />
-    <Content Include="Content\jquery-1.11.2.min.js" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\jquery.datetimepicker.js" />
+    <Content Include="Content\jquery.timeselector.css" />
+    <Content Include="Content\jquery.timeselector.js" />
+    <Content Include="Content\myjavascript.js" />
+    <Content Include="Content\jquery-1.11.2.min.js" />
     <Content Include="Content\jquery.js" />
     <Content Include="Content\mycss.css" />
     <Content Include="Global.asax" />
