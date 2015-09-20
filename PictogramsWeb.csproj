@@ -55,6 +55,9 @@
       <HintPath>packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="nunit.framework">
+      <HintPath>packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="Quartz">
       <HintPath>packages\Quartz.2.3.3\lib\net40\Quartz.dll</HintPath>
     </Reference>

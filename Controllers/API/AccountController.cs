@@ -15,7 +15,7 @@ namespace MvcApplication2.Controllers
     {
         public HttpResponseMessage ValidateLogIn(LoginModel log)
         {
-            if (!this.ModelState.IsValid || log == null )
+            if (log.EmailId == null || log.Password == null)
                 return this.Request.CreateResponse(HttpStatusCode.BadRequest,ModelState);
 
             try
@@ -47,6 +47,21 @@ namespace MvcApplication2.Controllers
             String username = idd.Name;
 
             bool check = PictogramsDb.tryUpdateTraffic(username, size);
+            if (!check) return new HttpResponseMessage(HttpStatusCode.Forbidden);
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
+        [BasicAuthenticationAttributeWithPassword, HttpPut]
+        public HttpResponseMessage UpdateAccountTraffic(int size)
+        {
+            //check for limit sizes
+            if (size < 512 || size > 2000000)
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+
+            GenericIdentity idd = (GenericIdentity)System.Web.HttpContext.Current.User.Identity;
+            String username = idd.Name;
+
+            bool check = PictogramsDb.UpdateTraffic(username, size);
             if (!check) return new HttpResponseMessage(HttpStatusCode.Forbidden);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }

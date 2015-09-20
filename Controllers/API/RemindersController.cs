@@ -56,13 +56,15 @@ namespace MvcApplication2.Controllers
         [BasicAuthenticationAttributeWithPassword]
         public HttpResponseMessage PostReminder(Reminder r)
         {
+
             if (!this.ModelState.IsValid || r == null) //|| !Utils.checkUri(r.urls))
-                return this.Request.CreateResponse(HttpStatusCode.BadRequest,ModelState);
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest,ModelState.ToString());
 
             GenericIdentity idd = (GenericIdentity)System.Web.HttpContext.Current.User.Identity;
             String username = idd.Name;
 
             //try to add reminder
+            r.daysofweek = Utils.getDaysOfWeekInt(r.repeatingDays);
             int _id = PictogramsDb.addReminder(r,username);
             //contact didnt'exist so reminder wans´t added
             if (_id == -1) return this.Request.CreateResponse(HttpStatusCode.NotFound, "Can´t add reminder to a user that don´t exist");
