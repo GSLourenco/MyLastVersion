@@ -82,7 +82,7 @@ namespace MvcApplication2.GCM
                 responseBody = getAndClose(response.GetResponseStream());
                 throw new IOException(status + " " + responseBody);
             }
-            else{ responseBody = getAndClose(response.GetResponseStream());}
+            else { responseBody = getAndClose(response.GetResponseStream()); }
 
             char[] delimiterChars = { '\n' };
             String[] lines = responseBody.Split(delimiterChars);

@@ -97,7 +97,7 @@ namespace MvcApplication2.Controllers
 
                 //check if the reminder that is being edited is from this user
                 int check = ReminderBusinessLayer.EditReminder(r, name);
-                if(check==-1) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                if (check == -1) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
                 if (check == -2)
                 {
                     error += "Data inválida, não pode selecionar uma hora passada" + "<br/>";
@@ -114,9 +114,10 @@ namespace MvcApplication2.Controllers
         public ActionResult SendReminders(String User)
         {
             String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-            String validate = ReminderBusinessLayer.ValidateSendReminders(User, name); 
+            String validate = ReminderBusinessLayer.ValidateSendReminders(User, name);
 
-            if (validate==null){
+            if (validate == null)
+            {
                 TempData["shortMessage"] = "Não existia lembretes para o contacto que tentou enviar ou o contacto já não existe, recomeçe o processo de novo";
                 return RedirectToAction("SelectContact");
             }
@@ -124,7 +125,7 @@ namespace MvcApplication2.Controllers
             String errorcode = ServiceLayer.SendNotification(validate, name);
             if (errorcode != null)
             {
-                return View("Contacts/Error");
+                return View("../Contacts/Error");
             }
 
             return View();
@@ -187,7 +188,7 @@ namespace MvcApplication2.Controllers
                 String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
                 //get reminders for that contact
                 IEnumerable<Reminder> list = ReminderBusinessLayer.GetReminders(name, user);
-                if (list == null) return Json(new { redirectUrl = "SelectContact" }, JsonRequestBehavior.AllowGet); 
+                if (list == null) return Json(new { redirectUrl = "SelectContact" }, JsonRequestBehavior.AllowGet);
 
                 return Json(list, JsonRequestBehavior.AllowGet);
             }
@@ -222,7 +223,7 @@ namespace MvcApplication2.Controllers
             String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
 
             HttpStatusCodeResult r = ServiceLayer.UploadFile(file, name);
-            if(r.StatusCode == (int)HttpStatusCode.OK)
+            if (r.StatusCode == (int)HttpStatusCode.OK)
                 return Json(r.StatusDescription);
             return r;
         }
@@ -252,9 +253,8 @@ namespace MvcApplication2.Controllers
 
 
             String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-            //check if contact exists
-            //do ajax code
-            IEnumerable<Reminder> list =ReminderBusinessLayer.GetHistoricalReminders(contact,name);
+
+            IEnumerable<Reminder> list = ReminderBusinessLayer.GetHistoricalReminders(name, contact);
             if (list == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Contact doesn't exist");
             return View(list);
 
@@ -271,7 +271,7 @@ namespace MvcApplication2.Controllers
             {
                 String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
 
-                Reminder r = PictogramsDb.getHistoricalReminder(idx, name);
+                Reminder r = ReminderBusinessLayer.GetHistoricalDetailedReminder(name, idx);
                 if (r == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
                 return PartialView("HistoricReminderDetails", r);
             }

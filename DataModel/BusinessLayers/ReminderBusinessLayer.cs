@@ -19,7 +19,7 @@ namespace MvcApplication2.DataModel
             return PictogramsDb.getAllReminders(id, email);
         }
 
-        public static IEnumerable<Reminder> GetFilteredReminders(String email,int contactId)
+        public static IEnumerable<Reminder> GetFilteredReminders(String email, int contactId)
         {
             //chech if contact exists 
             IEnumerable<Reminder> list = PictogramsDb.getAllReminders(contactId, email);
@@ -73,7 +73,7 @@ namespace MvcApplication2.DataModel
 
             int id = PictogramsDb.getContactId(user, email);
             IEnumerable<Reminder> list = GetReminders(email, user);
-            if (list==null ||!list.Any()) return null;
+            if (list == null || !list.Any()) return null;
 
             return reg_id;
         }
@@ -95,7 +95,7 @@ namespace MvcApplication2.DataModel
         public static Reminder GetReminderById(int id, String mail)
         {
             if (id < 0) return null;
-            
+
             return PictogramsDb.getReminder(id, mail);
         }
     }

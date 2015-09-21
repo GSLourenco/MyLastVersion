@@ -93,7 +93,8 @@ namespace MvcApplication2.Controllers
 
         public ViewResult About()
         {
-            if (Request.Browser.IsMobileDevice){
+            if (Request.Browser.IsMobileDevice)
+            {
                 return View("AboutMobile");
             }
             return View();

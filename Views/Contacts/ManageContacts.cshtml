@@ -23,7 +23,7 @@
     <script src="../Content/bootstrap-table.js"></script>
     <link rel="stylesheet" href="../Content/bootstrap-table.css">
 
-    
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -83,7 +83,7 @@
         <div class="row" style="background: rgba(245, 239, 239, 1)">
             <div class="col-md-12">
 
-                
+
                 <h4>Lista de contactos</h4>
                 <div class="table-responsive">
 
@@ -101,36 +101,36 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach (var tc in Model)
-                        {
-                            var floorplanSettings = @Html.Raw(Json.Encode(tc.contact));
-                            <tr>
-                                 
-                                <td>@tc.contact</td>
-                                <td>@tc.code</td>
-                                <td>@tc.status</td>
-                                <td>
-                                    <p data-placement="top" data-toggle="tooltip" title="" data-original-title="Histórico de Lembretes">
-                                        <button class="btn btn-primary btn-xs" onclick="GetHistorical(@floorplanSettings)" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
-                                    </p>
-                                </td>
-                                <td>
-                                    <p data-placement="top" data-toggle="tooltip" title="" data-original-title="Delete">
-                                        <button  onclick="DeleteRow(this,@floorplanSettings)" class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
-                                    </p>
-                                </td>
-                            
-                            </tr>
-                        }
-                    </tbody>
-                       
+                            @foreach (var tc in Model)
+                            {
+                                var floorplanSettings = @Html.Raw(Json.Encode(tc.contact));
+                                <tr>
+
+                                    <td>@tc.contact</td>
+                                    <td>@tc.code</td>
+                                    <td>@tc.status</td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="" data-original-title="Histórico de Lembretes">
+                                            <button class="btn btn-primary btn-xs" onclick="GetHistorical(@floorplanSettings)" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="" data-original-title="Delete">
+                                            <button  onclick="DeleteRow(this,@floorplanSettings)" class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
+                                        </p>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+
                     </table>
 
 
                 </div>
 
             </div>
-           
+
         </div>
         <!-- /.row -->
 
@@ -146,7 +146,7 @@
             <div class="row" style="background: rgba(245, 239, 239, 1)">
                 <div class="col-lg-12">
                     <p>© 2015 - Gonçalo Lourenço e Jorge Pinto </p>
-                    
+
                 </div>
             </div>
         </footer>
@@ -160,7 +160,7 @@
 <script>
 
     function GetHistorical(contact) {
-        this.location.href = "@Url.Action("GetHistorical","Reminder", new {contact = "abc"})".replace("abc", contact);
+        this.location.href = "@Url.Action("GetHistorical", "Reminder", new { contact = "abc" })".replace("abc", contact);
     }
 
     function DeleteRow(link, contact) {
@@ -177,12 +177,12 @@
                 return false;
             },
             statusCode: {
-                    500: function (data) {
-                        var newDoc = document.open("text/html", "replace");
-                        newDoc.write(data.responseText);
-                        newDoc.close();
-                    }
+                500: function (data) {
+                    var newDoc = document.open("text/html", "replace");
+                    newDoc.write(data.responseText);
+                    newDoc.close();
                 }
+            }
         });
 
 

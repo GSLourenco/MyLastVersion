@@ -39,7 +39,7 @@ namespace MvcApplication2.DataModel
                         tc.contact = rdr["contact"].ToString();
                         tc.status = rdr["status"].ToString();
 
-                       
+
                     }
                 }
 

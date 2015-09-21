@@ -7,45 +7,53 @@
 <!DOCTYPE html>
 
 
-    <div class="col-md-12">
-                    <h4>Título:</h4>
-                    <input id="title" value="@Model.title" type="text" class="form-control" readonly="readonly" />
-                    <p></p>
-                    <h4>Descrição:</h4>
-                    <input id="description" value="@Model.description" type="text" class="form-control" readonly="readonly"/>
-                    <p></p>
-                    <div id="Image_Container" class="col-md-6 left-div">   
-                     @{System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
-                    if(js.Deserialize<List<string>>(Model.urls).Count()>0){ 
-                     
-                      foreach (var url in js.Deserialize<List<string>>(Model.urls))
-                      {
+<div class="col-md-12">
+    <h4>Título:</h4>
+    <input id="title" value="@Model.title" type="text" class="form-control" readonly="readonly" />
+    <p></p>
+    <h4>Descrição:</h4>
+    <input id="description" value="@Model.description" type="text" class="form-control" readonly="readonly"/>
+    <p></p>
+    <div id="Image_Container" class="col-md-6 left-div">
+        @{System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+          if (js.Deserialize<List<string>>(Model.urls).Count() > 0)
+          {
+
+              foreach (var url in js.Deserialize<List<string>>(Model.urls))
+              {
                 
-                        <div class="wrapper">
-                            <img class="img" src= "@url" style="height: 100px; width: 100px" />
-                        </div>
+            <div class="wrapper">
+                <img class="img" src= "@url" style="height: 100px; width: 100px" />
+            </div>
                 
-                      }
-                      
-                }
-                }
-                        </div>
-                <div id="date_container" class="col-md-6 right-div">
-                    <h4>Data:</h4>
-                    <input name="date_info" type="text" class="form-control" readonly="readonly" />
-                    <div id ="days-of-week1">
-                        <h4>Repetição de alarme:</h4>
-                        <input type ="radio" value="7" class="checkthis form-group" disabled> Domingo<br>
-                        <input type ="radio" value="1" class="checkthis form-group" disabled> Segunda-Feira<br>
-                        <input type ="radio" value="2" class="checkthis form-group" disabled> Terça-Feira<br>
-                        <input type ="radio" value="3" class="checkthis form-group" disabled> Quarta-Feira<br>
-                        <input type ="radio" value="4" class="checkthis form-group" disabled> Quinta-Feira<br>
-                        <input type ="radio" value="5" class="checkthis form-group" disabled> Sexta-Feira<br>
-                        <input type ="radio" value="6" class="checkthis form-group" disabled> Sábado<br>
-                        </div>
-                </div>
+              }
+
+          }
+        }
+    </div>
+    <div id="date_container" class="col-md-6 right-div">
+        <h4>Data:</h4>
+        <input name="date_info" type="text" class="form-control" readonly="readonly" />
+        <div id="days-of-week1">
+            <h4>Repetição de alarme:</h4>
+            <input type="radio" value="7" class="checkthis form-group" disabled>
+            Domingo<br>
+            <input type="radio" value="1" class="checkthis form-group" disabled>
+            Segunda-Feira<br>
+            <input type="radio" value="2" class="checkthis form-group" disabled>
+            Terça-Feira<br>
+            <input type="radio" value="3" class="checkthis form-group" disabled>
+            Quarta-Feira<br>
+            <input type="radio" value="4" class="checkthis form-group" disabled>
+            Quinta-Feira<br>
+            <input type="radio" value="5" class="checkthis form-group" disabled>
+            Sexta-Feira<br>
+            <input type="radio" value="6" class="checkthis form-group" disabled>
+            Sábado<br>
         </div>
-                 
+    </div>
+</div>
+
 <script>
     var d = "@Model.date";
     var params = d.split('-');
@@ -56,7 +64,7 @@
 
     $('[name=date_info]')[0].value = d;
 
-    var day=parseInt("@Model.daysofweek");
+    var day = parseInt("@Model.daysofweek");
     var inputsWeek = $("#days-of-week1 > :input");
     var mask = 1;
     for (var i = 0; i < inputsWeek.length; i++) {

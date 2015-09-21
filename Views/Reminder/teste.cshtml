@@ -323,7 +323,7 @@
 
         //atribui evento ao botao de upload de imagens
         $($("#FileUpload :button")[0]).on("click", function () {
-            UploadFile($('#file')[0], $('#selectedPainel'),$('#dialog-confirm'));
+            UploadFile($('#file')[0], $('#selectedPainel'), $('#dialog-confirm'));
         });
 
 
@@ -440,53 +440,53 @@
     //executar para as partial views que servem para edição de lembretes
     //para que tenha um fincionamento semelhante ao passo 3
     function ExecuteWhenPartialViewIsOn() {
-       
-            var radioMode = $("input[name='mode1']");
-            $(radioMode).each(function () {
-                $(this).on("click", function () {
-                    var val = this.value;
-                    if (val == "pict") {
-                        $("#FileUpload1").hide();
-                        $("#painel1").show();
-                        $("#searchbox1").show();
-                    }
-                    else {
-                        $("#FileUpload1").show();
-                        $("#painel1").hide();
-                        $("#searchbox1").hide();
-                    }
-                });
+
+        var radioMode = $("input[name='mode1']");
+        $(radioMode).each(function () {
+            $(this).on("click", function () {
+                var val = this.value;
+                if (val == "pict") {
+                    $("#FileUpload1").hide();
+                    $("#painel1").show();
+                    $("#searchbox1").show();
+                }
+                else {
+                    $("#FileUpload1").show();
+                    $("#painel1").hide();
+                    $("#searchbox1").hide();
+                }
             });
-
-            
-            $($("#searchbox1 :button")[0]).on("click", function () {
-                loadPictogram($('#name1'), $('#painel1')[0], $('#selectedPainel1')[0]);
-            });
-
-            $($("#FileUpload1 :button")[0]).on("click", function () {
-                UploadFile($('#file1')[0], $('#selectedPainel1'), $('#dialog-confirm1'));
-            });
+        });
 
 
-            $('#selectedPainel1 > .wrapper').each(function () {
-                var div = this;
-                addCrossAndReplace(div)
-            });
+        $($("#searchbox1 :button")[0]).on("click", function () {
+            loadPictogram($('#name1'), $('#painel1')[0], $('#selectedPainel1')[0]);
+        });
+
+        $($("#FileUpload1 :button")[0]).on("click", function () {
+            UploadFile($('#file1')[0], $('#selectedPainel1'), $('#dialog-confirm1'));
+        });
 
 
-            $(".uploadButton").mousemove(function (e) {
-                var offL, offR, inpStart
-                offL = $(this).offset().left;
-                offT = $(this).offset().top;
-                aaa = $(this).find("input").width();
-                $(this).find("input").css({
-                    left: e.pageX - aaa - 30,
-                    top: e.pageY - offT - 10
-                })
-            });
+        $('#selectedPainel1 > .wrapper').each(function () {
+            var div = this;
+            addCrossAndReplace(div)
+        });
 
-            
-        
+
+        $(".uploadButton").mousemove(function (e) {
+            var offL, offR, inpStart
+            offL = $(this).offset().left;
+            offT = $(this).offset().top;
+            aaa = $(this).find("input").width();
+            $(this).find("input").css({
+                left: e.pageX - aaa - 30,
+                top: e.pageY - offT - 10
+            })
+        });
+
+
+
     }
 
     //funcao para ir buscar lembretes que ainda não foram enviados
@@ -515,9 +515,9 @@
                     addRemindersCounted++;
 
                     $(link).on("click", {
-                        id: idx, usernam: username, lnk:link
+                        id: idx, usernam: username, lnk: link
                     }, function (event) {
-                       
+
                         $.ajax({
                             type: 'GET',
                             url: '/Reminder/EditReminder',
@@ -554,25 +554,25 @@
                     });
                 }
             },
-                statusCode: {
-                    500: function (data) {
-                        var newDoc = document.open("text/html", "replace");
-                        newDoc.write(data.responseText);
-                        newDoc.close();
-                    }
+            statusCode: {
+                500: function (data) {
+                    var newDoc = document.open("text/html", "replace");
+                    newDoc.write(data.responseText);
+                    newDoc.close();
                 }
+            }
         });
     }
 
     function addReminder() {
 
-       
+
         var radioMode = $("input[name='reminder']:checked");
         var datetimer = $('#datetimepicker3')[0];
         var test = $(datetimer).siblings("[class=xdsoft_datetimepicker xdsoft_noselect xdsoft_dark xdsoft_inline]")[0];
         var calendar = $(test).find("[class*=xdsoft_current]");
         var dateCurrent = calendar[2];
-        
+
         var time = $('#time1')[0];
         var date = dateCurrent.getAttribute("data-year") + "-" + (parseInt(dateCurrent.getAttribute("data-month")) + 1) + "-" + dateCurrent.getAttribute("data-date");
         var timer = time.value;
@@ -635,7 +635,7 @@
                 $('#NoPictogramsError').empty();
                 addRemindersCounted++;
                 alert("lembrete adicionado");
-                
+
                 $(link).on("click", {
                     id: idx, usernam: data.contact
                 }, function (event) {
@@ -651,8 +651,8 @@
                             $('#editdiv').html(data);
                             ExecuteWhenPartialViewIsOn();
                         },
-                        error: function(data){ 
-                            if(data.status == "404"){ 
+                        error: function (data) {
+                            if (data.status == "404") {
                                 var link = $('#links').find("a[ReminderId='" + event.data.id + "']");
                                 $(link[0]).remove();
                                 $('#editdiv').empty();
@@ -673,8 +673,8 @@
                     });
                 });
             },
-            error: function(data){ 
-                if(data.status == "400"){ 
+            error: function (data) {
+                if (data.status == "400") {
                     $("#ReminderError").html(data.statusText);
                 }
 
@@ -690,8 +690,8 @@
     }
 
 
-    function UploadFile(fileInput,painel,dialog) {
-        
+    function UploadFile(fileInput, painel, dialog) {
+
         var formdata = new FormData(); //FormData object
         //Iterating through each files selected in fileInput
         for (i = 0; i < fileInput.files.length; i++) {
@@ -708,10 +708,10 @@
                 if (xhr.status == 200) {
                     var res = JSON.parse(xhr.responseText);
                     $("#FileError").empty();
-                    addImage(res,painel[0]);
+                    addImage(res, painel[0]);
                 }
                 if (xhr.status == 415) {
-                    $("#FileError").html("Formato de ficheiro selecionado é inválido ou ultrapassou o limite de espaço para uma imagem");   
+                    $("#FileError").html("Formato de ficheiro selecionado é inválido ou ultrapassou o limite de espaço para uma imagem");
                 }
 
                 if (xhr.status == 403) {
@@ -737,53 +737,53 @@
                         width: 400,
                         resizable: false,
                         buttons: {
-                        Yes: function () {
-                            var formdata = new FormData(); //FormData object
-                            //Iterating through each files selected in fileInput
-                            for (i = 0; i < fileInput.files.length; i++) {
-                                //Appending each file to FormData object
-                                formdata.append(fileInput.files[i].name, fileInput.files[i]);
-                            }
-                            //Creating an XMLHttpRequest and sending
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('POST', '/Reminder/ReplaceFile');
-                            xhr.send(formdata);
+                            Yes: function () {
+                                var formdata = new FormData(); //FormData object
+                                //Iterating through each files selected in fileInput
+                                for (i = 0; i < fileInput.files.length; i++) {
+                                    //Appending each file to FormData object
+                                    formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                                }
+                                //Creating an XMLHttpRequest and sending
+                                var xhr = new XMLHttpRequest();
+                                xhr.open('POST', '/Reminder/ReplaceFile');
+                                xhr.send(formdata);
 
 
-                            xhr.onreadystatechange = function () {
-                                if (xhr.readyState == 4 ) {
-                                    
-                                    if(xhr.status == 200){
-                                        var res = JSON.parse(xhr.responseText);
-                                        addImage(res,painel[0]);
-                                    }
+                                xhr.onreadystatechange = function () {
+                                    if (xhr.readyState == 4) {
 
-                                    if (xhr.status == 403) {
-                                        $("#FileError").html("Já ultrapassou o limite de ficheiros para upload");
+                                        if (xhr.status == 200) {
+                                            var res = JSON.parse(xhr.responseText);
+                                            addImage(res, painel[0]);
+                                        }
 
-                                    }
-                                    
-                                    if (xhr.status == 500) {
-                                        if (xhr.responseURL != null) {
-                                            var newDoc = document.open("text/html", "replace");
-                                            newDoc.write(xhr.response);
-                                            newDoc.close();
+                                        if (xhr.status == 403) {
+                                            $("#FileError").html("Já ultrapassou o limite de ficheiros para upload");
+
+                                        }
+
+                                        if (xhr.status == 500) {
+                                            if (xhr.responseURL != null) {
+                                                var newDoc = document.open("text/html", "replace");
+                                                newDoc.write(xhr.response);
+                                                newDoc.close();
+                                            }
                                         }
                                     }
                                 }
+                                $(this).dialog("close");
+                            },
+                            No: function () {
+                                $(this).dialog("close");
                             }
-                        $(this).dialog("close");
-                    },
-                    No: function () {
-                    $(this).dialog("close");
-                }
-                },
-                });
+                        },
+                    });
                 }
             }
             $("body").removeClass("loading");
-        return false;
-    } 
-        
+            return false;
+        }
+
     }
 </script>

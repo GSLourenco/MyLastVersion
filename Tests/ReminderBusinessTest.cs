@@ -14,7 +14,7 @@ namespace MvcApplication2.Tests
         [Test]
         public void GetReminders()
         {
-            IEnumerable<Reminder> result = ReminderBusinessLayer.GetReminders("jorgepint98@hotmail.com","Jorge_S3_mini");
+            IEnumerable<Reminder> result = ReminderBusinessLayer.GetReminders("jorgepint98@hotmail.com", "Jorge_S3_mini");
             int r = 4;
 
             Assert.AreEqual(r, result.Count());
@@ -38,16 +38,16 @@ namespace MvcApplication2.Tests
             r.title = "bbb";
             r.date = "2020-10-10";
             r.time = "20:30";
-            r.repeatingDays = new Boolean[] {false,false,false,false,false,false,false };
+            r.repeatingDays = new Boolean[] { false, false, false, false, false, false, false };
             r.urls = "[]";
-              
-            int result=ReminderBusinessLayer.addReminder(r,"jorgepint98@hotmail.com");
+
+            int result = ReminderBusinessLayer.addReminder(r, "jorgepint98@hotmail.com");
             int res = 0;
 
             Assert.Greater(result, res);
 
-           Boolean d= ReminderBusinessLayer.DeleteReminder("jorgepint98@hotmail.com",result);
-           Assert.AreEqual(d, true);
+            Boolean d = ReminderBusinessLayer.DeleteReminder("jorgepint98@hotmail.com", result);
+            Assert.AreEqual(d, true);
 
         }
 

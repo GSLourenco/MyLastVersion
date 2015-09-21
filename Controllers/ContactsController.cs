@@ -37,7 +37,8 @@ namespace MvcApplication2.Controllers
             String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
             int validate = ContactBusinessLayer.PostContact(contact, name);
 
-            if(validate==0){
+            if (validate == 0)
+            {
                 ModelState.AddModelError("", "O contacto que quer adicionar já existe, escolha outro nome");
                 return View();
             }

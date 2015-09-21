@@ -36,7 +36,7 @@ namespace MvcApplication2.Controllers
         }
 
 
-        [ActionName("traffic")]
+        [ActionName("traffic"),BasicAuthenticationAttributeWithPassword]
         public HttpResponseMessage GetTraffic(int size)
         {
             //check for limit sizes
@@ -51,7 +51,7 @@ namespace MvcApplication2.Controllers
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
-        [ActionName("traffic")]
+        [ActionName("traffic"),BasicAuthenticationAttributeWithPassword]
         public HttpResponseMessage PutTraffic([FromBody]int size)
         {
             //check for limit sizes

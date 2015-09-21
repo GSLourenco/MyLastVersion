@@ -27,7 +27,7 @@ namespace MvcApplication2.DataModel
             return errorcode;
         }
 
-        public static HttpStatusCodeResult UploadFile(HttpPostedFileBase file,String name)
+        public static HttpStatusCodeResult UploadFile(HttpPostedFileBase file, String name)
         {
             if (!Program.IsImage(file)) return new HttpStatusCodeResult(HttpStatusCode.UnsupportedMediaType);
             String url = null;
@@ -45,12 +45,12 @@ namespace MvcApplication2.DataModel
 
             //check if exists a differente file with the same name as the one you were trying to upload
             if (url == null) return new HttpStatusCodeResult(HttpStatusCode.Conflict);
-            return new HttpStatusCodeResult(HttpStatusCode.OK,url);
+            return new HttpStatusCodeResult(HttpStatusCode.OK, url);
         }
 
         public static HttpStatusCodeResult ReplaceFile(HttpPostedFileBase file, String name)
         {
-      
+
             if (!Program.IsImage(file)) return new HttpStatusCodeResult(HttpStatusCode.UnsupportedMediaType);
             String url = null;
 

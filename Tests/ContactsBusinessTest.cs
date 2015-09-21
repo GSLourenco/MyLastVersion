@@ -31,10 +31,10 @@ namespace MvcApplication2.Tests
         [Test]
         public void PostNewContactAndDeleteIt()
         {
-            int result = ContactBusinessLayer.PostContact("teste","jorgepint98@hotmail.com");
+            int result = ContactBusinessLayer.PostContact("teste", "jorgepint98@hotmail.com");
             int r = 0;
 
-            Assert.Greater(result,r);
+            Assert.Greater(result, r);
 
             Boolean b = ContactBusinessLayer.DeleteContact("teste", "jorgepint98@hotmail.com");
             Assert.AreEqual(b, false);
@@ -67,12 +67,12 @@ namespace MvcApplication2.Tests
             Assert.AreEqual(result, r);
         }
 
-        
 
 
 
 
-        
+
+
 
 
     }
