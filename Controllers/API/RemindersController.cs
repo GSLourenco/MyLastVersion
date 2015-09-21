@@ -24,7 +24,7 @@ namespace MvcApplication2.Controllers
             String contact = credentials[0];
             String mail = credentials[1];
 
-            return ReminderBusinessLayer.GetFilteredReminders(mail,Int32.Parse(mail));
+            return ReminderBusinessLayer.GetFilteredReminders(mail,Int32.Parse(contact));
         }
 
 
