@@ -30,6 +30,22 @@ namespace MvcApplication2.DataModel
             return list;
         }
 
+        public static IEnumerable<Reminder> GetHistoricalReminders(String email, String user)
+        {
+            int id = PictogramsDb.getContactId(user, email);
+            if (id < 0) return null;
+
+            return PictogramsDb.GetHistoricalReminders(email, id);
+        }
+
+        public static Reminder GetHistoricalDetailedReminder(String email, int id)
+        {
+            Reminder r = PictogramsDb.getHistoricalReminder(id, email);
+            return r;
+        }
+
+
+
         public static Boolean DeleteReminder(String name, int id)
         {
             if (id < 0) return false;

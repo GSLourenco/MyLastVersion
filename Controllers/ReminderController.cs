@@ -254,12 +254,8 @@ namespace MvcApplication2.Controllers
             String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
             //check if contact exists
             //do ajax code
-            int id = PictogramsDb.getContactId(contact, name);
-            if (id == -1) return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Contact doesn't exist");
-
-            //get list of reminders that were send in the past
-            IEnumerable<Reminder> list = PictogramsDb.GetHistoricalReminders(name, id);
-
+            IEnumerable<Reminder> list =ReminderBusinessLayer.GetHistoricalReminders(contact,name);
+            if (list == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Contact doesn't exist");
             return View(list);
 
         }
@@ -275,8 +271,6 @@ namespace MvcApplication2.Controllers
             {
                 String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
 
-                //check if reminder is exists for our user
-                // do ajax xode
                 Reminder r = PictogramsDb.getHistoricalReminder(idx, name);
                 if (r == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
                 return PartialView("HistoricReminderDetails", r);
