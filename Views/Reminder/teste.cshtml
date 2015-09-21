@@ -133,7 +133,6 @@
                             {
                                 <tr>
                                     <td>
-
                                         <input type="radio" name="contact" value="@c" class="checkthis form-group"></td>
                                     <td>
                                         
@@ -178,7 +177,7 @@
         </div>
         <div class="row setup-content"  id="step-2">
             <div class="col-md-12">
-                <div class="col-md-12">
+                <div>
                     <h3>Passo 3-Personalize o seu lembrete</h3>
                     
                     <div id="dialog-confirm"></div>
@@ -270,11 +269,12 @@
 <script type="text/javascript">
     var addRemindersCounted = 0;
 
+    //activar a escolha de horas para o lembrete
     $(function () {
         $('#time1').timeselector();
     });
 
-
+    //activar a escolha de data para o lembrete
     $('#datetimepicker3').datetimepicker({
         format: 'd.m.Y H:i',
         inline: true,
@@ -298,10 +298,12 @@
         var weekrepeat = document.getElementById("days-of-week");
         var inputsWeek = $("#days-of-week > :input");
 
+        //radio input que seleciona se o utilizador quer escolher pictogramas ou upload de imagens
         $(radioMode).each(function () {
             $(this).on("click", function () {
                 var val = this.value;
-                if (val=="pict") {
+                if (val == "pict") {
+                    //esconde a divisao para upload e mostra as divisoes para escolher pictograma
                     $("#FileUpload").hide();
                     $("#painel").show();
                     $("#searchbox").show();
@@ -314,16 +316,18 @@
             });
         });
 
+        //atribui envento ao botao de pesquisa para fazer load dos pictogramas
         $($("#searchbox :button")[0]).on("click", function () {
             loadPictogram($('#name'), $('#painel')[0], $('#selectedPainel')[0]);
         });
 
+        //atribui evento ao botao de upload de imagens
         $($("#FileUpload :button")[0]).on("click", function () {
             UploadFile($('#file')[0], $('#selectedPainel'),$('#dialog-confirm'));
         });
 
 
-
+        //funcao para selecionar e retirar a selecção dos inputs para repetição dos dias da semana
         $(inputsWeek).each(function () {
             $(this).on("click", function () {
                 if ($(this).hasClass("previousChecked")) {
@@ -339,6 +343,7 @@
 
         $(weekrepeat).hide();
 
+        //checkbox para mostrar os inputs para repetição de dias
         checkbox.click(function () {
             if ($(this).is(':checked')) {
                 $(weekrepeat).show();
@@ -348,6 +353,7 @@
             }
         });
 
+        //reajustamento para selecionar no botao q faz upload do ficheiro
         $(".uploadButton").mousemove(function (e) {
             var offL, offR, inpStart
             offL = $(this).offset().left;
@@ -375,6 +381,7 @@
             }
         });
 
+        //Carregar no botao seguinte
         allNextBtn.click(function () {
             var curStep = $(this).closest(".setup-content"),
                 curStepBtn = curStep.attr("id"),
@@ -382,14 +389,17 @@
                 curInputs = curStep.find("input[type='text'],input[type='url'],input[type='radio']"),
                 isValid = true;
 
+            //se estivermos no 1o passo
             $(".form-group").removeClass("has-error");
             if (curStepBtn == 'step-1') {
+                //contacto que foi selecionado
                 var curInputs = curStep.find("input[type='radio']:checked");
                 if (curInputs.length > 0) {
                     var name = (curInputs[0]).value;
                     getRemindersFromUser(name);
                     nextStepWizard.removeAttr('disabled').trigger('click');
                     $("#noPrevious").attr("disabled", "disabled");
+                    //permitir que o link do 4o passo consiga enviar lembretes para o utilizador selecionado
                     $("#sendReminder").attr("href", "/Reminder/SendReminders?User=" + curInputs[0].value);
                     return;
                 }
@@ -398,8 +408,10 @@
                 isValid = false;
                 $('#errorNoContacts').html("Não existe nenhum contacto selecionado");
             }
+
             else if (curStepBtn == "step-4") {
                 radioMode = $("input[name='reminder']:checked");
+                //se o utilizador escolhe enviar sem lembretes é removido a divisao
                 if (radioMode[0].value == 2) {
                     $("#container").remove();
                 }
@@ -425,6 +437,8 @@
         $('div.setup-panel div a.btn-primary').trigger('click');
     });
 
+    //executar para as partial views que servem para edição de lembretes
+    //para que tenha um fincionamento semelhante ao passo 3
     function ExecuteWhenPartialViewIsOn() {
        
             var radioMode = $("input[name='mode1']");
@@ -475,6 +489,7 @@
         
     }
 
+    //funcao para ir buscar lembretes que ainda não foram enviados
     function getRemindersFromUser(user) {
         $.ajax({
             type: 'GET',
@@ -514,14 +529,21 @@
                                 $('#editdiv').html(data);
                                 ExecuteWhenPartialViewIsOn();
                             },
-                            statusCode: {
-                            404: function() {
-                                var link = $('#links').find("a[ReminderId='" + event.data.id + "']");
-                                $(link[0]).remove();
-                            }
-                            },
-                            statusCode: {
-                                500: function (data) {
+                            error: function (data) {
+                                if (data.status == "404") {
+                                    var link = $('#links').find("a[ReminderId='" + event.data.id + "']");
+                                    $(link[0]).remove();
+                                    $('#editdiv').empty();
+                                }
+
+                                if (data.status == "400") {
+
+                                    var link = $('#links').find("a[ReminderId='" + event.data.id + "']");
+                                    $(link[0]).remove();
+                                    $('#editdiv').empty();
+                                }
+
+                                if (data.status == "500") {
                                     var newDoc = document.open("text/html", "replace");
                                     newDoc.write(data.responseText);
                                     newDoc.close();
@@ -554,7 +576,6 @@
         var time = $('#time1')[0];
         var date = dateCurrent.getAttribute("data-year") + "-" + (parseInt(dateCurrent.getAttribute("data-month")) + 1) + "-" + dateCurrent.getAttribute("data-date");
         var timer = time.value;
-
 
         var imgs = $("#selectedPainel").find('img.img');
         if (radioMode[0].value == 1) {
@@ -611,6 +632,7 @@
                 $('#painel').empty();
                 $('#selectedPainel').empty();
                 $("#ReminderError").empty();
+                $('#NoPictogramsError').empty();
                 addRemindersCounted++;
                 alert("lembrete adicionado");
                 
@@ -633,11 +655,13 @@
                             if(data.status == "404"){ 
                                 var link = $('#links').find("a[ReminderId='" + event.data.id + "']");
                                 $(link[0]).remove();
+                                $('#editdiv').empty();
                             }
 
                             if (data.status == "400") {
                                 var link = $('#links').find("a[ReminderId='" + event.data.id + "']");
                                 $(link[0]).remove();
+                                $('#editdiv').empty();
                             }
 
                             if (data.status == "500") {

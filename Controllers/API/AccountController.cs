@@ -13,7 +13,7 @@ namespace MvcApplication2.Controllers
 {
     public class AccountController : ApiController
     {
-        public HttpResponseMessage ValidateLogIn(LoginModel log)
+        public HttpResponseMessage PostLogIn(LoginModel log)
         {
             if (log.EmailId == null || log.Password == null)
                 return this.Request.CreateResponse(HttpStatusCode.BadRequest);
@@ -30,17 +30,17 @@ namespace MvcApplication2.Controllers
             }
             catch (FormatException e)
             {
-                return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Parâmetros não foram bem formatados"); 
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Parâmetros não foram bem formatados");
             }
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
-       
-        [BasicAuthenticationAttributeWithPassword,HttpPut]
-        public HttpResponseMessage TryUpdateAccountTraffic(int size)
+
+        [ActionName("traffic")]
+        public HttpResponseMessage GetTraffic(int size)
         {
             //check for limit sizes
-            if(size<512 || size > 2000000)
+            if (size < 512 || size > 2000000)
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
 
             GenericIdentity idd = (GenericIdentity)System.Web.HttpContext.Current.User.Identity;
@@ -51,8 +51,8 @@ namespace MvcApplication2.Controllers
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
-        [BasicAuthenticationAttributeWithPassword, HttpPut]
-        public HttpResponseMessage UpdateAccountTraffic(int size)
+        [ActionName("traffic")]
+        public HttpResponseMessage PutTraffic([FromBody]int size)
         {
             //check for limit sizes
             if (size < 512 || size > 2000000)

@@ -11,7 +11,6 @@ using System.Security.Principal;
 using MvcApplication2.Models;
 using MvcApplication2.DataModel;
 using System.Web.Mvc;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,7 +18,7 @@ namespace MvcApplication2.Controllers
 {
     public class PictogramsController : ApiController
     {
-        public IEnumerable<PictogramModel> getAllPictogramas(String pictogram)
+        public IEnumerable<PictogramModel> GetAllPictogramas(String pictogram)
         {
             List<PictogramModel> list = PictogramsDb.getPictogram(pictogram);
             return list;

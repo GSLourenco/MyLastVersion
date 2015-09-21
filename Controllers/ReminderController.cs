@@ -35,12 +35,12 @@ namespace MvcApplication2.Controllers
         public ViewResult SelectContact()
         {
             String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-            List<String> receive_users = PictogramsDb.getUsersFrom(name);
-            
-            if (!receive_users.Any()) 
-                return View("../Contacts/GenerateCode",model:"Não existem contactos na sua lista, adicione");
+            List<String> receive_users = ContactBusinessLayer.GetUsers(name);
 
-            if(TempData["shortMessage"]!=null)
+            if (!receive_users.Any())
+                return View("../Contacts/GenerateCode", model: "Não existem contactos na sua lista, adicione");
+
+            if (TempData["shortMessage"] != null)
                 @ViewBag.Message = TempData["shortMessage"].ToString();
 
             return View("teste", receive_users);
@@ -50,18 +50,15 @@ namespace MvcApplication2.Controllers
         [Authorize]
         public ActionResult EditReminder(int idx, string username)
         {
-            if (!this.ModelState.IsValid || username.Trim() == "" || idx < 0)
+            if (!this.ModelState.IsValid || username.Trim() == "")
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
-            
-           
+
+
             if (Request.IsAjaxRequest())
             {
                 String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-                string contact = PictogramsDb.getUserName(Int32.Parse(username));
-                bool checkUsername = PictogramsDb.checkIfUserExists(name, contact);
 
-                if (!checkUsername) RedirectToAction("SelectContact", "Reminder") ;
-                Reminder r = PictogramsDb.getReminder(idx, name);
+                Reminder r = ReminderBusinessLayer.GetReminderById(idx, name);
                 if (r == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
                 return PartialView("ReminderDetails", r);
             }
@@ -69,7 +66,7 @@ namespace MvcApplication2.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.NotFound);
         }
 
-       
+
         [Authorize, HttpPost]
         public ActionResult EditReminder(Reminder r)
         {
@@ -77,7 +74,7 @@ namespace MvcApplication2.Controllers
             //get error string if model is not valid or the uris are not uris from our amazon bucket
             String error = "";
             bool ModelError = false; bool UriError = false;
-            if ((ModelError = !this.ModelState.IsValid) || r == null)// || (UriError=!Utils.checkUri(r.urls)))
+            if ((ModelError = !this.ModelState.IsValid) || r == null || (UriError=!Utils.checkUri(r.urls)))
             {
                 if (ModelError)
                 {
@@ -93,18 +90,20 @@ namespace MvcApplication2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, error);
             }
 
-            if(Request.IsAjaxRequest()){
-            
-            String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
+            if (Request.IsAjaxRequest())
+            {
 
-            //check if the reminder that is being edited is from this user
-            bool b = PictogramsDb.checkIfReminderIsFromThisUser(r.id, name);
-            if (!b) return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
 
-            //edit reminder
-            r.daysofweek = Utils.getDaysOfWeekInt(r.repeatingDays);
-            PictogramsDb.EditReminder(r);
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
+                //check if the reminder that is being edited is from this user
+                int check = ReminderBusinessLayer.EditReminder(r, name);
+                if(check==-1) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                if (check == -2)
+                {
+                    error += "Data inválida, não pode selecionar uma hora passada" + "<br/>";
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, error);
+                }
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
             }
 
             return new HttpStatusCodeResult(HttpStatusCode.NotFound);
@@ -115,33 +114,14 @@ namespace MvcApplication2.Controllers
         public ActionResult SendReminders(String User)
         {
             String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-            String reg_id = PictogramsDb.getRegisteredId(User, name);
+            String validate = ReminderBusinessLayer.ValidateSendReminders(User, name); 
 
-            //check if user exists or is not registered in GCM
-            if (reg_id == String.Empty) {
-                TempData["shortMessage"] = "o contacto já não existe, recomeçe o processo de novo";
-                return RedirectToAction("SelectContact");
-            }   
-            int id = PictogramsDb.getContactId(User, name);
-            IEnumerable<Reminder> list = PictogramsDb.getAllReminders(id, name);
-            if (!list.Any())
-            {
+            if (validate==null){
                 TempData["shortMessage"] = "Não existia lembretes para o contacto que tentou enviar ou o contacto já não existe, recomeçe o processo de novo";
                 return RedirectToAction("SelectContact");
             }
 
-            Sender s = new Sender(Constants.Project_key);
-            Message m = new Message.Builder()
-                 .collapseKey("Update reminders")
-                 .timeToLive(2419200)
-                 .delayWhileIdle(true)
-                 .dryRun(false)
-                 .addData("Email", name)
-                 .build();
-
-            Result r = s.sendNoRetry(m, reg_id);
-            String errorcode = r.getErrorCodeName();
-
+            String errorcode = ServiceLayer.SendNotification(validate, name);
             if (errorcode != null)
             {
                 return View("Contacts/Error");
@@ -151,7 +131,7 @@ namespace MvcApplication2.Controllers
         }
 
 
-       
+
 
         [Authorize, HttpPost]
         public ActionResult addReminder(Reminder reminder)
@@ -159,8 +139,8 @@ namespace MvcApplication2.Controllers
 
             //get error string if model is not valid or the uris are not uris from our amazon bucket
             String error = "";
-            bool ModelError=false; bool UriError=false;
-            if ((ModelError= !this.ModelState.IsValid) || reminder == null)// || (UriError=!Utils.checkUri(reminder.urls)))
+            bool ModelError = false; bool UriError = false;
+            if ((ModelError = !this.ModelState.IsValid) || reminder == null || (UriError=!Utils.checkUri(reminder.urls)))
             {
                 if (ModelError)
                 {
@@ -176,17 +156,20 @@ namespace MvcApplication2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, error);
             }
 
-            
+
 
             if (Request.IsAjaxRequest())
             {
                 String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-                reminder.daysofweek = Utils.getDaysOfWeekInt(reminder.repeatingDays);
-                
-                int idx = PictogramsDb.addReminder(reminder, name);
-                //cant add reminder because there's no contact
-                if (idx == -1) return Json(new { redirectUrl = "SelectContact" }, JsonRequestBehavior.AllowGet) ;
-                return Json(new { id = idx,title=reminder.title,contact=PictogramsDb.getContactId(reminder.contact,name)}, JsonRequestBehavior.AllowGet); 
+
+                int idx = ReminderBusinessLayer.addReminder(reminder, name);
+                if (idx == -1) return Json(new { redirectUrl = "SelectContact" }, JsonRequestBehavior.AllowGet);
+                if (idx == -2)
+                {
+                    error += "Data inválida, não pode selecionar uma hora passada" + "<br/>";
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, error);
+                }
+                return Json(new { id = idx, title = reminder.title, contact = PictogramsDb.getContactId(reminder.contact, name) }, JsonRequestBehavior.AllowGet);
             }
 
             return new HttpStatusCodeResult(HttpStatusCode.NotFound);
@@ -197,18 +180,14 @@ namespace MvcApplication2.Controllers
         public ActionResult getAllReminders(String user)
         {
             if (!this.ModelState.IsValid || user == String.Empty)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request"); 
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
 
             if (Request.IsAjaxRequest())
             {
                 String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-
-                //chech if contact exists 
-                int id = PictogramsDb.getContactId(user, name);
-                if(id < 0) 
-                    return Json(new { redirectUrl = "SelectContact" }, JsonRequestBehavior.AllowGet);
                 //get reminders for that contact
-                IEnumerable<Reminder> list = PictogramsDb.getAllReminders(id, name);
+                IEnumerable<Reminder> list = ReminderBusinessLayer.GetReminders(name, user);
+                if (list == null) return Json(new { redirectUrl = "SelectContact" }, JsonRequestBehavior.AllowGet); 
 
                 return Json(list, JsonRequestBehavior.AllowGet);
             }
@@ -219,17 +198,14 @@ namespace MvcApplication2.Controllers
         [Authorize, HttpDelete]
         public ActionResult DeleteReminder(int id)
         {
-            if (!this.ModelState.IsValid || id < 0)
-               return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (!this.ModelState.IsValid)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
 
-            //check if reminder is exists for our user
-            Reminder r = PictogramsDb.getReminder(id, name);
-            if (r == null)
-                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
-            //delete reminder
-            PictogramsDb.DeleteReminder(id, name);
+            //check if reminder  exists for our user
+            Boolean delete = ReminderBusinessLayer.DeleteReminder(name, id);
+            if (!delete) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             return new HttpStatusCodeResult(HttpStatusCode.NoContent);
 
         }
@@ -238,61 +214,33 @@ namespace MvcApplication2.Controllers
         public ActionResult UploadFile()
         {
 
-                //check if its uploading only one file
-                if (Request.Files.Count != 1) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //check if its uploading only one file
+            if (Request.Files.Count != 1) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-                //get file and check if it is an image
-                HttpPostedFileBase file = Request.Files[0];
-                if (!Program.IsImage(file)) return new HttpStatusCodeResult(HttpStatusCode.UnsupportedMediaType);
+            //get file and check if it is an image
+            HttpPostedFileBase file = Request.Files[0];
+            String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
 
-
-                String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-                String url = null;
-
-                
-                if (file != null)
-                {
-                    //check if user has enough traffic to upload the file
-                    if (PictogramsDb.tryUpdateTraffic(name, file.ContentLength))
-                    {
-                        //upload the file
-                        url = Program.putObject(file,name);
-                    }
-                    else return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
-                }
-
-                //check if exists a differente file with the same name as the one you were trying to upload
-                if (url == null) return new HttpStatusCodeResult(HttpStatusCode.Conflict);
-                return Json(url);
+            HttpStatusCodeResult r = ServiceLayer.UploadFile(file, name);
+            if(r.StatusCode == (int)HttpStatusCode.OK)
+                return Json(r.StatusDescription);
+            return r;
         }
 
         [Authorize, HttpPost]
         public ActionResult ReplaceFile()
         {
-                //check if its uploading only one file
-                if (Request.Files.Count != 1) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //check if its uploading only one file
+            if (Request.Files.Count != 1) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-                //get file and check if it is an image
-                HttpPostedFileBase file = Request.Files[0];
-                if (!Program.IsImage(file)) return new HttpStatusCodeResult(HttpStatusCode.UnsupportedMediaType);
+            HttpPostedFileBase file = Request.Files[0];
+            String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
 
-                String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-                String url = null;
+            HttpStatusCodeResult r = ServiceLayer.ReplaceFile(file, name);
+            if (r.StatusCode == (int)HttpStatusCode.OK)
+                return Json(r.StatusDescription);
+            return r;
 
-                
-                if (file != null)
-                {
-                    //check if user has enough traffic to upload the file
-                    if (PictogramsDb.tryUpdateTraffic(name, file.ContentLength))
-                    {
-                        //replace existing image with our file
-                        url = Program.ReplaceObject(file,name);
-                    }
-                    else return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
-                }
-
-                return Json(url);
-            
         }
 
         [Authorize, HttpGet]
@@ -302,18 +250,18 @@ namespace MvcApplication2.Controllers
             if (!this.ModelState.IsValid || contact == String.Empty)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
 
-            
-                String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-                //check if contact exists
-                //do ajax code
-                int id = PictogramsDb.getContactId(contact, name);
-                if (id == -1) return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Contact doesn't exist");
 
-                //get list of reminders that were send in the past
-                IEnumerable<Reminder> list = PictogramsDb.GetHistoricalReminders(name, id);
+            String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
+            //check if contact exists
+            //do ajax code
+            int id = PictogramsDb.getContactId(contact, name);
+            if (id == -1) return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Contact doesn't exist");
 
-                return View(list);
-            
+            //get list of reminders that were send in the past
+            IEnumerable<Reminder> list = PictogramsDb.GetHistoricalReminders(name, id);
+
+            return View(list);
+
         }
 
         [Authorize, HttpGet]
@@ -326,7 +274,7 @@ namespace MvcApplication2.Controllers
             if (Request.IsAjaxRequest())
             {
                 String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-                
+
                 //check if reminder is exists for our user
                 // do ajax xode
                 Reminder r = PictogramsDb.getHistoricalReminder(idx, name);
@@ -337,7 +285,7 @@ namespace MvcApplication2.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.NotFound);
         }
 
-        
+
 
     }
 }

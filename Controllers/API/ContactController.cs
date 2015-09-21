@@ -14,49 +14,40 @@ namespace MvcApplication2.Controllers
     {
 
         [BasicAuthenticationAttributeWithPassword]
-        public List<ContactModel> getContacts()
+        public List<ContactModel> GetContacts()
         {
             GenericIdentity idd = (GenericIdentity)System.Web.HttpContext.Current.User.Identity;
             String email = idd.Name;
 
-            List<ContactModel> list = PictogramsDb.getUsersModelFrom(email);
-            return list;
+            return ContactBusinessLayer.GetUsersModel(email);
         }
 
         [BasicAuthenticationAttributeWithPassword]
-        public HttpResponseMessage CreateContact(String contact)
+        public HttpResponseMessage PostContact([FromBody]String contact)
         {
-            if (!this.ModelState.IsValid || contact.Trim() == "" || contact.Length > 20){
-                return  this.Request.CreateResponse(HttpStatusCode.BadRequest, "O contacto que inseriu não é válido");
+            //Content-Type: application/x-www-form-urlencoded
+            //=name
+            if (!this.ModelState.IsValid || contact.Trim() == "" || contact.Length > 20)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest, "O contacto que inseriu não é válido");
             }
 
             GenericIdentity idd = (GenericIdentity)System.Web.HttpContext.Current.User.Identity;
             String name = idd.Name;
-            //check if contact already exists
-            int idx = PictogramsDb.getContactId(contact, name);
-            if (idx > 0){
-               return this.Request.CreateResponse(HttpStatusCode.BadRequest, "O contacto que quer adicionar já existe, escolha outro nome");
+            int code = ContactBusinessLayer.PostContact(contact, name);
+
+            if (code == 0) {
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest, "O contacto que quer adicionar já existe, escolha outro nome");
             }
-
-            //generate random code to that contact
-            Random rnd = new Random();
-            int code = rnd.Next(10000, 99999);
-            String status = "Código não inserido";
-
-            //try to insert code, if already exists, a new one is generated
-            while (!PictogramsDb.InsertTemporaryCode(contact, code, status, name))
-            {
-                code = rnd.Next(10000, 99999);
-            }
-
-            return this.Request.CreateResponse(HttpStatusCode.Created,code);
+           
+            return this.Request.CreateResponse(HttpStatusCode.Created, code);
         }
 
         [BasicAuthenticationAttributeWithPassword]
         public HttpResponseMessage DeleteContact(int id)
         {
             if (!this.ModelState.IsValid || id < 0)
-               return new HttpResponseMessage(HttpStatusCode.BadRequest);
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
 
             GenericIdentity idd = (GenericIdentity)System.Web.HttpContext.Current.User.Identity;
             String username = idd.Name;
@@ -65,8 +56,7 @@ namespace MvcApplication2.Controllers
             String contactName = PictogramsDb.getUserName(id);
             if (contactName == null) return new HttpResponseMessage(HttpStatusCode.BadRequest);
 
-            //delete contact
-            PictogramsDb.DeleteUser(contactName, username);
+            ContactBusinessLayer.DeleteContact(contactName, username);
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }
     }

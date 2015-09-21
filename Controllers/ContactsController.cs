@@ -21,45 +21,35 @@ namespace MvcApplication2.Controllers
 {
     public class ContactsController : Controller
     {
-        
+
 
         [HttpPost, Authorize]
         public ActionResult GenerateCode(String contact)
         {
-            if (!this.ModelState.IsValid || contact.Trim() == ""||contact.Length>20)
+            if (!this.ModelState.IsValid || contact.Trim() == "" || contact.Length > 20)
             {
                 ModelState.AddModelError("", "O contacto que inseriu não é válido");
                 return View();
             }
 
-           
-                //check if user exists
-                String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-                int idx = PictogramsDb.getContactId(contact, name);
-                if (idx > 0)
-                {
-                    ModelState.AddModelError("", "O contacto que quer adicionar já existe, escolha outro nome");
-                    return View();
-                }
-                    
-                Random rnd = new Random();
-                int code = rnd.Next(10000, 99999);
-                String status = "Código não inserido";
 
-                while (!PictogramsDb.InsertTemporaryCode(contact, code, status, name))
-                {
-                    code = rnd.Next(10000, 99999);
-                }
-             
-                return RedirectToAction("ManageContacts");
-            
+            //check if user exists
+            String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
+            int validate = ContactBusinessLayer.PostContact(contact, name);
+
+            if(validate==0){
+                ModelState.AddModelError("", "O contacto que quer adicionar já existe, escolha outro nome");
+                return View();
+            }
+            return RedirectToAction("ManageContacts");
+
         }
 
         [HttpGet, Authorize]
         public ActionResult ManageContacts()
         {
             String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-            List<TemporaryCode> list = PictogramsDb.getTemporaryCodes(name);
+            List<TemporaryCode> list = ContactBusinessLayer.GetTemporaryCodes(name);
 
             return View(list);
         }
@@ -78,7 +68,7 @@ namespace MvcApplication2.Controllers
         public ActionResult DeleteContact(String contact)
         {
 
-            if (!this.ModelState.IsValid || contact == null || contact.Length>20)
+            if (!this.ModelState.IsValid || contact == null || contact.Length > 20)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
 
             //only accepts ajaxrequest
@@ -86,7 +76,7 @@ namespace MvcApplication2.Controllers
             {
                 //delete contact
                 String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
-                PictogramsDb.DeleteUser(contact, name);
+                ContactBusinessLayer.DeleteContact(contact, name);
                 return new HttpStatusCodeResult(HttpStatusCode.NoContent);
             }
 

@@ -34,6 +34,10 @@ namespace MvcApplication2.Controllers
         }
         public ViewResult Register()
         {
+            if (Request.Browser.IsMobileDevice)
+            {
+                return View("RegisterMobile");
+            }
             return View();
         }
 
@@ -51,7 +55,7 @@ namespace MvcApplication2.Controllers
             {
                 if (model.IsUserExist(model.EmailId, model.Password))
                 {
-                   FormsAuthentication.RedirectFromLoginPage(model.EmailId, false);
+                    FormsAuthentication.RedirectFromLoginPage(model.EmailId, false);
                 }
                 else
                 {
@@ -68,14 +72,14 @@ namespace MvcApplication2.Controllers
             if (ModelState.IsValid)
             {
 
-                   if (model.Insert())
-                   {
-                       return RedirectToAction("LogOn", "Home");
-                   }
-                   else
-                   {
-                       ModelState.AddModelError("", "Email Id Already Exist");
-                   }
+                if (model.Insert())
+                {
+                    return RedirectToAction("LogOn", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Email Id Already Exist");
+                }
 
             }
             return View(model);
@@ -89,18 +93,22 @@ namespace MvcApplication2.Controllers
 
         public ViewResult About()
         {
+            if (Request.Browser.IsMobileDevice){
+                return View("AboutMobile");
+            }
             return View();
         }
+
 
         public ActionResult GetPictogram(String pictogram)
         {
             if (!this.ModelState.IsValid)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad Request");
 
-                List<PictogramModel> list = PictogramsDb.getPictogram(pictogram);
-                var json = JsonConvert.SerializeObject(list);
-                return Json(list, JsonRequestBehavior.AllowGet); 
-            
+            List<PictogramModel> list = PictogramsDb.getPictogram(pictogram);
+            var json = JsonConvert.SerializeObject(list);
+            return Json(list, JsonRequestBehavior.AllowGet);
+
         }
 
     }

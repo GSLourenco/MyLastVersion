@@ -187,6 +187,11 @@
                     if (data.status == "400") {
                         $("#EditReminderError").html(data.statusText);
                     }
+                    if (data.status == "404") {
+                        var link = $('#links').find("a[ReminderId='" + idx + "']");
+                        $(link).remove();
+                        $('#editdiv').empty();
+                    }
 
                 }
             });
@@ -206,8 +211,8 @@
                 var link = $('#links').find("a[ReminderId='" + reminderId + "']");
                 $(link[0]).remove();
             },
-            statusCode: {
-                404: function () {
+            error: function (data) {
+                if (data.status == "404") {
                     $(divParent).remove();
                     var link = $('#links').find("a[ReminderId='" + reminderId + "']");
                     $(link).remove();

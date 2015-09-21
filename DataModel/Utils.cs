@@ -13,6 +13,7 @@ namespace MvcApplication2.DataModel
 {
     public class Utils
     {
+        //transform days of week into integer
         public static int getDaysOfWeekInt(IEnumerable<bool> daysOfWeek)
         {
             int res = 0;
@@ -24,6 +25,7 @@ namespace MvcApplication2.DataModel
             return res;
         }
 
+        //transform a string with SHA1
         public static string GenerateSaltedSHA1(string plainTextString)
         {
             HashAlgorithm algorithm = new SHA1Managed();
@@ -37,10 +39,10 @@ namespace MvcApplication2.DataModel
             return Convert.ToBase64String(saltedSHA1Bytes);
         }
 
-        public static string [] GenerateSHA1WithNonRandomSalt(string plainTextString, string salt)
+        public static string[] GenerateSHA1WithNonRandomSalt(string plainTextString, string salt)
         {
             HashAlgorithm algorithm = new SHA1Managed();
-            var saltBytes = Encoding.ASCII.GetBytes(salt); 
+            var saltBytes = Encoding.ASCII.GetBytes(salt);
             var plainTextBytes = Encoding.ASCII.GetBytes(plainTextString);
 
             var plainTextWithSaltBytes = AppendByteArray(plainTextBytes, saltBytes);
@@ -50,43 +52,44 @@ namespace MvcApplication2.DataModel
             return new String[] { Convert.ToBase64String(saltedSHA1Bytes), Convert.ToBase64String(saltBytes) };
         }
 
+        //Resise image to uplaoad to amazon services
         public static System.Drawing.Bitmap DoResize(System.Drawing.Bitmap originalImg, int widthInPixels, int heightInPixels)
         {
             System.Drawing.Bitmap bitmap;
-            
-                bitmap = new System.Drawing.Bitmap(widthInPixels, heightInPixels);
-                using (System.Drawing.Graphics graphic = System.Drawing.Graphics.FromImage(bitmap))
-                {
-                    // Quality properties
-                    graphic.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                    graphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                    graphic.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-                    graphic.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
 
-                    graphic.DrawImage(originalImg, 0, 0, widthInPixels, heightInPixels);
-                    return bitmap;
-                }
-            
-            
+            bitmap = new System.Drawing.Bitmap(widthInPixels, heightInPixels);
+            using (System.Drawing.Graphics graphic = System.Drawing.Graphics.FromImage(bitmap))
+            {
+                // Quality properties
+                graphic.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                graphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                graphic.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                graphic.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+
+                graphic.DrawImage(originalImg, 0, 0, widthInPixels, heightInPixels);
+                return bitmap;
+            }
+
+
         }
 
-        public static Stream ImageToArray(System.Drawing.Bitmap image,String path)
+        public static Stream ImageToArray(System.Drawing.Bitmap image, String path)
         {
-                MemoryStream mem = new MemoryStream();
-                mem.Position = 0;
-                switch (path)
-                {
-                    case ".gif":
-                        image.Save(mem, System.Drawing.Imaging.ImageFormat.Gif);
-                        break;
-                    case ".png":
-                        image.Save(mem, System.Drawing.Imaging.ImageFormat.Png);
-                        break;
-                    default:
-                        image.Save(mem, System.Drawing.Imaging.ImageFormat.Jpeg);
-                        break;
-                }
-                return mem;
+            MemoryStream mem = new MemoryStream();
+            mem.Position = 0;
+            switch (path)
+            {
+                case ".gif":
+                    image.Save(mem, System.Drawing.Imaging.ImageFormat.Gif);
+                    break;
+                case ".png":
+                    image.Save(mem, System.Drawing.Imaging.ImageFormat.Png);
+                    break;
+                default:
+                    image.Save(mem, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    break;
+            }
+            return mem;
         }
 
         private static byte[] GenerateSalt(int saltSize)
@@ -113,38 +116,42 @@ namespace MvcApplication2.DataModel
         internal static Boolean checkUri(string urls)
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
-            String [] u = js.Deserialize<String []>(urls);
+            String[] u = js.Deserialize<String[]>(urls);
+            //maximum size of uris images
             if (u.Length > 6) return false;
 
             for (int i = 0; i < u.Length; i++)
             {
                 Uri uriResult;
                 String uri = u[i];
+                //check if the uri is valid
                 bool result = Uri.TryCreate(uri, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp
-                  || uriResult.Scheme == Uri.UriSchemeHttps) ;
+                  || uriResult.Scheme == Uri.UriSchemeHttps);
                 if (!result) return false;
             }
+            //check if uris is from our buckets in the amazon service
             return Program.validAmazonUri(u);
         }
 
-        
+
     }
 
     class ICustomPrincipal : IPrincipal
     {
 
         public String EmailId { get; set; }
-       
+
         public IIdentity Identity { get; private set; }
         public bool IsInRole(string role) { return false; }
 
-        public ICustomPrincipal(){
-         this.Identity = new GenericIdentity("");   
+        public ICustomPrincipal()
+        {
+            this.Identity = new GenericIdentity("");
         }
 
         public ICustomPrincipal(string email)
         {
-        this.Identity = new GenericIdentity(email);
+            this.Identity = new GenericIdentity(email);
         }
     }
 }

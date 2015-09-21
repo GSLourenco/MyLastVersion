@@ -1,0 +1,83 @@
+﻿@model MvcApplication2.Models.Register
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+          @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+            {          
+        <div class="col-md-6">
+        <table style="margin:auto">
+            <tr>
+                <td>
+                    <table style="font-family: Calibri">
+                        <tr style="height: 80px">
+                        </tr>
+                        <tr style="height:40px">
+                            <td style="width:300px">
+                                 <input type="text" name="FirstName" class="form-control"  placeholder="Primeiro Nome" required autofocus>
+                            </td>
+                            <td style="width: 200px; color: Red" align="left">
+                                @Html.ValidationMessageFor(m => m.FirstName)
+                            </td>
+                        </tr>
+                        <tr style="height:40px">
+                             <td style="width:300px" >
+                                 <input type="text" name="LastName" class="form-control" placeholder="Último Nome" >
+                            </td>
+                            <td style="color: Red">
+                                @Html.ValidationMessageFor(m => m.LastName)
+                            </td>
+                        </tr>
+                        <tr style="height:40px">
+                            <td style="width:300px">
+                                 <input type="text" name="EmailId" class="form-control" placeholder="Email">
+                            </td>
+                            <td style="color: Red">
+                                @Html.ValidationMessageFor(m => m.EmailId)
+                            </td>
+                        </tr>
+                        <tr style="height:40px">
+                            <td style="width:300px">
+                                 <input type="password" name="Password" class="form-control" placeholder="Password">
+                            </td>
+                            <td style="color: Red">
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </td>
+                        </tr>
+                       <tr style="height:40px">
+                            <td style="width:300px">
+                                <input type="password" name="ConfirmPassword" class="form-control" placeholder="Confirmar Password">
+                            </td>
+                            <td style="color: Red">
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                            </td>
+                        </tr>
+                        <tr style="height:40px">
+                            <td >
+                                <input type="submit" value="Registar" class="btn btn-lg btn-primary btn-block" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="color: Red">
+                                @Html.ValidationSummary(true)
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+             }
+    </div>
+</body>
+</html>
