@@ -723,13 +723,14 @@ namespace MvcApplication2.DataModel
                 conn.ConnectionString = connectionString;
                 conn.Open();
 
-                SqlCommand updateCommand = new SqlCommand("UPDATE Temporary_Reminders SET title = @title, description = @description,date = @date, time = @time, urls=@urls Where id=@id", conn);
+                SqlCommand updateCommand = new SqlCommand("UPDATE Temporary_Reminders SET title = @title, description = @description,date = @date, time = @time, urls=@urls,daysofweek=@daysofweek Where id=@id", conn);
                 updateCommand.Parameters.AddWithValue("@title", r.title);
                 updateCommand.Parameters.AddWithValue("@description", r.description);
                 updateCommand.Parameters.AddWithValue("@date", r.date);
                 updateCommand.Parameters.AddWithValue("@time", r.time);
                 updateCommand.Parameters.AddWithValue("@urls", r.urls);
                 updateCommand.Parameters.AddWithValue("@id", r.id);
+                updateCommand.Parameters.AddWithValue("@daysofweek", r.daysofweek);
 
                 updateCommand.ExecuteNonQuery();
             }

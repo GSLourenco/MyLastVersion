@@ -140,7 +140,7 @@
     <Compile Include="DataModel\Quartz Schedulers\SetTrafficJob.cs" />
     <Compile Include="DataModel\Quartz Schedulers\DatabaseJob.cs" />
     <Compile Include="DataModel\Quartz Schedulers\JobScheduler.cs" />
-    <Compile Include="DataModel\Program.cs" />
+    <Compile Include="DataModel\PictoUploader.cs" />
     <Compile Include="DataModel\DbAcessLayer\PictogramsDb.cs" />
     <Compile Include="DataModel\Utils.cs" />
     <Compile Include="GCM\Constants.cs" />

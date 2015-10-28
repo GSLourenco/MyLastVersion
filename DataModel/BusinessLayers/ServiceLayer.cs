@@ -29,7 +29,7 @@ namespace MvcApplication2.DataModel
 
         public static HttpStatusCodeResult UploadFile(HttpPostedFileBase file, String name)
         {
-            if (!Program.IsImage(file)) return new HttpStatusCodeResult(HttpStatusCode.UnsupportedMediaType);
+            if (!PictoUploader.IsImage(file)) return new HttpStatusCodeResult(HttpStatusCode.UnsupportedMediaType);
             String url = null;
 
             if (file != null)
@@ -38,7 +38,7 @@ namespace MvcApplication2.DataModel
                 if (PictogramsDb.tryUpdateTraffic(name, file.ContentLength))
                 {
                     //upload the file
-                    url = Program.putObject(file, name);
+                    url = PictoUploader.putObject(file, name);
                 }
                 else return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
@@ -51,7 +51,7 @@ namespace MvcApplication2.DataModel
         public static HttpStatusCodeResult ReplaceFile(HttpPostedFileBase file, String name)
         {
 
-            if (!Program.IsImage(file)) return new HttpStatusCodeResult(HttpStatusCode.UnsupportedMediaType);
+            if (!PictoUploader.IsImage(file)) return new HttpStatusCodeResult(HttpStatusCode.UnsupportedMediaType);
             String url = null;
 
 
@@ -61,7 +61,7 @@ namespace MvcApplication2.DataModel
                 if (PictogramsDb.tryUpdateTraffic(name, file.ContentLength))
                 {
                     //replace existing image with our file
-                    url = Program.ReplaceObject(file, name);
+                    url = PictoUploader.ReplaceObject(file, name);
                 }
                 else return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }

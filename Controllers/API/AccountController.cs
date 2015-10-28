@@ -40,7 +40,7 @@ namespace MvcApplication2.Controllers
         public HttpResponseMessage GetTraffic(int size)
         {
             //check for limit sizes
-            if (size < 512 || size > 2000000)
+            if (size < 512 || size > 2097152)
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
 
             GenericIdentity idd = (GenericIdentity)System.Web.HttpContext.Current.User.Identity;
@@ -55,7 +55,7 @@ namespace MvcApplication2.Controllers
         public HttpResponseMessage PutTraffic([FromBody]int size)
         {
             //check for limit sizes
-            if (size < 512 || size > 2000000)
+            if (size < 512 || size > 2097152)
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
 
             GenericIdentity idd = (GenericIdentity)System.Web.HttpContext.Current.User.Identity;

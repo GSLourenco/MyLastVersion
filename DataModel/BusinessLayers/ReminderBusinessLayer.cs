@@ -60,7 +60,7 @@ namespace MvcApplication2.DataModel
         {
             r.daysofweek = Utils.getDaysOfWeekInt(r.repeatingDays);
             DateTime rtime = DateTime.ParseExact(r.date + " " + r.time, "yyyy-M-d HH:mm", System.Globalization.CultureInfo.InvariantCulture);
-            if (rtime < DateTime.UtcNow.AddHours(1)) return -2;
+            if (rtime < DateTime.UtcNow) return -2;
             return PictogramsDb.addReminder(r, email);
         }
 

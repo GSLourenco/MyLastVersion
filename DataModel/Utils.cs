@@ -130,7 +130,7 @@ namespace MvcApplication2.DataModel
                 if (!result) return false;
             }
             //check if uris is from our buckets in the amazon service
-            return Program.validAmazonUri(u);
+            return PictoUploader.validAmazonUri(u);
         }
 
 

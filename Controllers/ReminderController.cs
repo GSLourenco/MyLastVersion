@@ -74,7 +74,7 @@ namespace MvcApplication2.Controllers
             //get error string if model is not valid or the uris are not uris from our amazon bucket
             String error = "";
             bool ModelError = false; bool UriError = false;
-            if ((ModelError = !this.ModelState.IsValid) || r == null)// || (UriError=!Utils.checkUri(r.urls)))
+            if ((ModelError = !this.ModelState.IsValid) || r == null || (UriError=!Utils.checkUri(r.urls)))
             {
                 if (ModelError)
                 {
@@ -141,7 +141,7 @@ namespace MvcApplication2.Controllers
             //get error string if model is not valid or the uris are not uris from our amazon bucket
             String error = "";
             bool ModelError = false; bool UriError = false;
-            if ((ModelError = !this.ModelState.IsValid) || reminder == null)// || (UriError=!Utils.checkUri(reminder.urls)))
+            if ((ModelError = !this.ModelState.IsValid) || reminder == null || (UriError=!Utils.checkUri(reminder.urls)))
             {
                 if (ModelError)
                 {

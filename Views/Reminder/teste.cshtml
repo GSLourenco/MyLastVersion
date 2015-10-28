@@ -323,7 +323,7 @@
 
         //atribui evento ao botao de upload de imagens
         $($("#FileUpload :button")[0]).on("click", function () {
-            UploadFile($('#file')[0], $('#selectedPainel'), $('#dialog-confirm'));
+            UploadFile($('#file')[0], $('#selectedPainel'), $('#dialog-confirm'),$('#FileError'));
         });
 
 
@@ -464,7 +464,7 @@
         });
 
         $($("#FileUpload1 :button")[0]).on("click", function () {
-            UploadFile($('#file1')[0], $('#selectedPainel1'), $('#dialog-confirm1'));
+            UploadFile($('#file1')[0], $('#selectedPainel1'), $('#dialog-confirm1'), $('#FileError1'));
         });
 
 
@@ -690,7 +690,7 @@
     }
 
 
-    function UploadFile(fileInput, painel, dialog) {
+    function UploadFile(fileInput, painel, dialog,file_error) {
 
         var formdata = new FormData(); //FormData object
         //Iterating through each files selected in fileInput
@@ -707,11 +707,11 @@
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
                     var res = JSON.parse(xhr.responseText);
-                    $("#FileError").empty();
+                    $(file_error).empty();
                     addImage(res, painel[0]);
                 }
                 if (xhr.status == 415) {
-                    $("#FileError").html("Formato de ficheiro selecionado é inválido ou ultrapassou o limite de espaço para uma imagem");
+                    $(file_error).html("Formato de ficheiro selecionado é inválido ou ultrapassou o limite de espaço para uma imagem");
                 }
 
                 if (xhr.status == 403) {
@@ -727,7 +727,7 @@
                 }
                 if (xhr.status == 409) {
                     $(dialog[0]).html("Já adicionou recentemente uma imagem com este nome, deseja substituir a imagem?");
-                    $("#FileError").empty();
+                    $(file_error).empty();
                     $($(dialog)[0]).dialog({
                         modal: true,
                         title: 'Confirmar',
@@ -759,7 +759,7 @@
                                         }
 
                                         if (xhr.status == 403) {
-                                            $("#FileError").html("Já ultrapassou o limite de ficheiros para upload");
+                                            $(file_error).html("Já ultrapassou o limite de ficheiros para upload");
 
                                         }
 

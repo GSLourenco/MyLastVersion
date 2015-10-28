@@ -31,6 +31,7 @@
                     <div class="uploadButton">
                         <input id="file1" type="file" name="file" />
                     </div>
+                     <label id="FileError1" class ="error"></label>
                     <button type="button" class="btn btn-success" value="Fazer upload da imagem">Fazer upload da imagem</button>
                 </div> 
                 <div id="painel1" class="col-md-8 left-div">
@@ -129,9 +130,23 @@
         for (var i = 0; i < inputsWeek.length; i++) {
             if ((mask & days) != 0) {
                 $(inputsWeek[i]).prop('checked', true);
+                inputsWeek[i].className = "previousChecked";
             }
             mask = mask << 1;
         }
+
+        $(inputsWeek).each(function () {
+            $(this).on("click", function () {
+                if ($(this).hasClass("previousChecked")) {
+                    this.checked = false;
+                    this.className = "";
+                }
+                else {
+                    this.checked = true;
+                    this.className = "previousChecked";
+                }
+            });
+        });
 
 
     });
@@ -149,7 +164,7 @@
 
         var urls = new Array();
         var painel = $("#selectedPainel1");
-        if (painel !== 'undefined') {
+        if ($(painel).is(":visible")) {
             var imgs = $(painel).find('img.img');
             if (imgs.length == 0) { $('#NoPictogramsError1').html("Não tem pictogramas selecionados"); return; }
             for (var i = 0; i < imgs.length; i++) {
@@ -192,6 +207,8 @@
             success: function (data, textStatus, xhr) {
                 alert("O seu lembrete foi alterado com sucesso");
                 $("#EditReminderError").empty();
+                var link = $('#links').find("a[ReminderId='" + idx + "']");
+                link[0].textContent = "Lembrete: " + title;
             },
             error: function (data) {
                 if (data.status == "400") {
