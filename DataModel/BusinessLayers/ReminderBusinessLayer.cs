@@ -24,7 +24,7 @@ namespace MvcApplication2.DataModel
             //chech if contact exists 
             IEnumerable<Reminder> list = PictogramsDb.getAllReminders(contactId, email);
             list = list.Where(r => DateTime.ParseExact(r.date + " " + r.time, "yyyy-M-d HH:mm",
-                                                 System.Globalization.CultureInfo.InvariantCulture) > DateTime.UtcNow.AddHours(1));
+                                                 System.Globalization.CultureInfo.InvariantCulture) > DateTime.UtcNow);
             //transfer reminders to historic
             PictogramsDb.TransferReminderstoHistorical(list, contactId, email);
             return list;
@@ -86,7 +86,7 @@ namespace MvcApplication2.DataModel
             //edit reminder
             r.daysofweek = Utils.getDaysOfWeekInt(r.repeatingDays);
             DateTime rtime = DateTime.ParseExact(r.date + " " + r.time, "yyyy-M-d HH:mm", System.Globalization.CultureInfo.InvariantCulture);
-            if (rtime < DateTime.UtcNow.AddHours(1)) return -2;
+            if (rtime < DateTime.UtcNow) return -2;
             PictogramsDb.EditReminder(r);
 
             return 2;
