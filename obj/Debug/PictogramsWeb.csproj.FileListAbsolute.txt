@@ -129,9 +129,6 @@ C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.Razor.dll
 C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Deployment.dll
 C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.dll
 C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Razor.dll
-C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\AWS.SessionProvider.xml
-C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\AWS.TraceListener.xml
-C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\AWSSDK.xml
 C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.pdb
 C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.xml
 C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\Common.Logging.Core.pdb
@@ -222,3 +219,5 @@ D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Deployment.xml
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Razor.xml
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\obj\Debug\MvcApplication2.dll
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\obj\Debug\MvcApplication2.pdb
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\nunit.framework.dll
+C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\nunit.framework.xml

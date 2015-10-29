@@ -251,6 +251,7 @@
     <Content Include="Views\Home\AboutMobile.cshtml" />
     <Content Include="Views\Home\RegisterMobile.cshtml" />
     <Content Include="Views\Contacts\Error.cshtml" />
+    <Content Include="Views\Reminder\Error.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

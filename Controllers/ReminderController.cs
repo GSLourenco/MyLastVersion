@@ -255,7 +255,7 @@ namespace MvcApplication2.Controllers
             String name = (HttpContext.User as ICustomPrincipal).Identity.Name;
 
             IEnumerable<Reminder> list = ReminderBusinessLayer.GetHistoricalReminders(name, contact);
-            if (list == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Contact doesn't exist");
+            if (list == null) return View("Error");
             return View(list);
 
         }
