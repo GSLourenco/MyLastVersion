@@ -47,7 +47,7 @@ namespace MvcApplication2.Controllers
         public HttpResponseMessage PostReminder(Reminder r)
         {
 
-            if (!this.ModelState.IsValid || r == null || !Utils.checkUri(r.urls))
+            if (!this.ModelState.IsValid || r == null)
                 return this.Request.CreateResponse(HttpStatusCode.BadRequest, ModelState.ToString());
 
             GenericIdentity idd = (GenericIdentity)System.Web.HttpContext.Current.User.Identity;
