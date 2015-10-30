@@ -191,11 +191,7 @@ D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\Microsoft.Web.Infrastructure.dll
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\Newtonsoft.Json.dll
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\nunit.framework.dll
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\Quartz.dll
-D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Net.Http.Formatting.dll
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.Helpers.dll
-D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.Http.dll
-D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.Http.WebHost.dll
-D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.Mvc.dll
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.Razor.dll
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.Deployment.dll
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.dll
@@ -208,10 +204,7 @@ D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\nunit.framework.xml
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\Quartz.pdb
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\Quartz.xml
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\Microsoft.Web.Infrastructure.xml
-D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Net.Http.Formatting.xml
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.Helpers.xml
-D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.Http.xml
-D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.Http.WebHost.xml
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.Mvc.xml
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.Razor.xml
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\bin\System.Web.WebPages.xml
@@ -221,3 +214,4 @@ D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\obj\Debug\MvcApplication2.dll
 D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\obj\Debug\MvcApplication2.pdb
 C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\nunit.framework.dll
 C:\Users\Gonçalo Silva\Dropbox\Projeto\Gonçalo\Mvc\bin\nunit.framework.xml
+D:\Dropbox\ISEL\Projeto\Gonçalo\Mvc\obj\Debug\PictogramsWeb.csprojResolveAssemblyReference.cache
